@@ -7,7 +7,7 @@ int fibonacci(int number) {
 
     int f;
 
-    if (number == 1 || 2) { f = 1; }
+    if (number == 1 || number == 2) { f = 1; }
     
     else 
     {    f = fibonacci(number-1) + fibonacci(number-2); 
