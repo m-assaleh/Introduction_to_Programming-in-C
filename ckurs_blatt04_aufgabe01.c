@@ -3,20 +3,18 @@
 #include "input.h" // Hier binden wir die Bibliothek ein
 
 
-int fibonacci(int n) {
+int fibonacci(int number) {
 
     int f;
 
-    if (n == 1) {
-        f = 1;
-    }
-    else {
-        f = fibonacci(n - 1) + fibonacci(n - 2);
-    }
+    if (number == 1 || 2) { f = 1; }
+    
+    else 
+    {    f = fibonacci(number-1) + fibonacci(number-2); 
+    
     return f;
+  }
 }
-
-
 
 int main(){
     int n = lese_int(); // Hier rufen wir die Funktion lese_int auf.
