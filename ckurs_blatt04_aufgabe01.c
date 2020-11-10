@@ -11,9 +11,9 @@ int fibonacci(int number) {
     
     else 
     {    f = fibonacci(number-1) + fibonacci(number-2); 
-    
+    }
     return f;
-  }
+  
 }
 
 int main(){
