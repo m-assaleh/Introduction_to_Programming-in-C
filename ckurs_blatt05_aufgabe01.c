@@ -8,7 +8,7 @@ void print_array(int array[], int len){
     printf("\n");
 }
 
-int sum(int array[], int len, int *p){
+void sum(int array[], int len, int *p){
     int sum = 0;
     for(int i = 0; i < len; i++){
         sum += array[i];
