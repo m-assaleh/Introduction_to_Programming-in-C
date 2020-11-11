@@ -14,7 +14,7 @@ void print_sum(int array[], int len){
     for(int i = 0; i < len; i++){
         sum = sum + array[i];
     }
-    printf("Sum: %d\n",sum);
+    printf("Summe: %d\n",sum);
 }
 
 void print_min(int array[], int len){
