@@ -37,9 +37,8 @@ int  min(int array[], int len){
 }
 
 int main(){
-    int array[] ={2,4,5,6,2,5,2,5,2,3};
+    int array[] = {9, 4, 7, 8, 10, 5, 1, 6, 3, 2};
     int len = 10;
-
     print_array(array, len);
 
     int min_num = min(array, len);
@@ -51,6 +50,6 @@ int main(){
     int p;
     sum(array, len, &p);
     printf("Summe: %d", p);
-    
+
     return 0;
 }
