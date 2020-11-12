@@ -5,11 +5,26 @@
 int main() {
     int n = lese_int();
     int laenge = n-1;
+    int* array = malloc(n * sizeof(int));
 
-    // Hier implementieren
+    for(int i=0; i < laenge; i++) {
+        array[i] = 1;
+    }
 
-    // Mit print_prim Primzahlen ausgeben
-    //print_prim(array, laenge);
+    for(int i=0; i<laenge; i++){
 
+        if(array[i] == 1) {
+
+            int x = i+2;
+            for(int j=i+1; j<laenge; j++) {
+                if((j+2) % x == 0) {
+                    array[j]=0;
+                }
+            }
+        }
+    }
+
+    print_prim(array, laenge);
+    free(array);
     return 0;
 }
