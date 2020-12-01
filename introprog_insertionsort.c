@@ -16,7 +16,7 @@ void insertion_sort(int array[], int len) {
 
      for (int i = 1; i < len; i++) {
        /* code */
-       int key = array[i]
+       int key = array[i];
        int j = i - 1;
        while (j > -1 && array[j] > key) {
          /* code */
