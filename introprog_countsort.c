@@ -18,10 +18,11 @@ void count_sort_calculate_counts(int input_array[], int len, int count_array[]) 
 
 void count_sort_write_output_array(int output_array[], int len, int count_array[]) {
     /* Hier Funktion implementieren */
-    for (int i, x = 0; i <= MAX_LAENGE; ++i) {
+    
+    for (int i, k = 0; i <= MAX_LAENGE; ++i) {
         for (int j = 0; j < count_array[i]; ++j) {
-            output_array[x] = i;
-            x = 1 + x;
+            output_array[k] = i;
+            k = 1 + k;
         }
     }
 }
