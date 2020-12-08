@@ -8,7 +8,7 @@ int MAX_VALUE = 100;
 void count_sort_calculate_counts(int input_array[], int len, int count_array[]) {
     /* Hier Funktion implementieren */
     for (int i = 0; i < MAX_LAENGE; ++i) {
-        count_array[i] = o;
+        count_array[i] = 0;
     }
 
     for (int i = 0; i < len; ++i) {
