@@ -11,15 +11,14 @@ void count_sort_calculate_counts(int input_array[], int len, int count_array[]) 
         count_array[i] = 0;
     }
 
-    for (int i = 0; i < len; ++i) {
-        count_array[input_array[i]] = 1 + count_array[input_array[i]];
+    for (int j = 0; j < len; ++j) {
+        count_array[input_array[j]] = 1 + count_array[input_array[j]];
     }
 }
 
 void count_sort_write_output_array(int output_array[], int len, int count_array[]) {
     /* Hier Funktion implementieren */
-    int x = 0,
-    for (int i = 0; i <= MAX_LAENGE; ++i) {
+    for (int i, x = 0; i <= MAX_LAENGE; ++i) {
         for (int j = 0; j < count_array[i]; ++j) {
             output_array[x] = i;
             x = 1 + x;
