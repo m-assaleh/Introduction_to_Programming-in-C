@@ -23,7 +23,6 @@ long for_linear(int n, int* befehle)
         // updating the value of sum with sum + get_value_one()
         (*befehle)++;
 
-        (*befehle)++;
 
     }
 
@@ -66,7 +65,6 @@ long for_quadratisch(int n, int* befehle)
             // updating the value of sum with sum + get_value_one()
             (*befehle)++;
 
-            (*befehle)++;
 
         }
 
