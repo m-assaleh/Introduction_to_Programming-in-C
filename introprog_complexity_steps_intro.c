@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include "introprog_complexity_steps_input.h"
 
-
 long for_linear(int n, int* befehle)
 {
-
 
 // allocation of sum = 0
     long sum =0;
@@ -23,7 +21,6 @@ long for_linear(int n, int* befehle)
         // updating the value of sum with sum + get_value_one()
         (*befehle)++;
 
-
     }
 
     // exiting the "for" loop when comparing i with <= n returns false
@@ -39,10 +36,9 @@ long for_linear(int n, int* befehle)
 long for_quadratisch(int n, int* befehle)
 {
 
-
     // allocation of sum = 0
-    (*befehle)++;
     long sum = 0;
+    (*befehle)++;
 
 
     // allocation of i = 1
@@ -65,7 +61,6 @@ long for_quadratisch(int n, int* befehle)
             // updating the value of sum with sum + get_value_one()
             (*befehle)++;
 
-
         }
 
         // exiting the "for" loop when comparing j with <= n returns false
@@ -87,8 +82,8 @@ long for_kubisch(int n, int* befehle)
 {
 
     // allocation of sum = 0
-    (*befehle)++;
     long sum = 0;
+    (*befehle)++;
 
 
     // allocation of i = 1
@@ -195,5 +190,3 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-
-
