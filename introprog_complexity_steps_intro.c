@@ -16,12 +16,14 @@ long for_linear(int n, int* befehle)
     for (int i = 1; i <= n ; ++i) {
         //  for looping n times when True "Comparing i with <= n" and adding 1 to i n times ++i
         (*befehle)++;
+        (*befehle)++;
 
 
         sum += get_value_one();
         // updating the value of sum with sum + get_value_one()
         (*befehle)++;
 
+        (*befehle)++;
 
     }
 
@@ -29,6 +31,8 @@ long for_linear(int n, int* befehle)
     (*befehle)++;
 
 
+// returning the function output
+    (*befehle)++;
     return sum;
 }
 
@@ -47,6 +51,7 @@ long for_quadratisch(int n, int* befehle)
     for(int i = 1; i <= n; ++i) {
         //  for the looping n times when True "Comparing i with <= n" and adding 1 to i n times ++i
         (*befehle)++;
+        (*befehle)++;
 
 
         // allocation of j = 1
@@ -54,12 +59,14 @@ long for_quadratisch(int n, int* befehle)
         for(int j = 1; j <= n; ++j) {
             //  for the looping n times when True "Comparing j with <= n" and adding 1 to j n times ++j
             (*befehle)++;
+            (*befehle)++;
 
 
             sum += get_value_one();
             // updating the value of sum with sum + get_value_one()
             (*befehle)++;
 
+            (*befehle)++;
 
         }
 
@@ -72,6 +79,8 @@ long for_quadratisch(int n, int* befehle)
     (*befehle)++;
 
 
+// returning the function output
+    (*befehle)++;
     return sum;
 }
 
@@ -89,6 +98,7 @@ long for_kubisch(int n, int* befehle)
     for(int i = 1; i <= n; ++i) {
         //  for the looping n times when True "Comparing i with <= n" and adding 1 to i n times ++i
         (*befehle)++;
+        (*befehle)++;
 
 
         // allocation of j = 1
@@ -96,12 +106,14 @@ long for_kubisch(int n, int* befehle)
         for(int j = 1; j <= n; ++j) {
             //  for the looping n times when True "Comparing j with <= n" and adding 1 to j n times ++j
             (*befehle)++;
+            (*befehle)++;
 
 
             // allocation of k = 1
             (*befehle)++;
             for(int k = 1; k <= n; ++k) {
                 //  for the looping n times when True "Comparing k with <= n" and adding 1 to k n times ++k
+                (*befehle)++;
                 (*befehle)++;
 
 
@@ -123,6 +135,8 @@ long for_kubisch(int n, int* befehle)
     (*befehle)++;
 
 
+// returning the function output
+    (*befehle)++;
     return sum;
 }
 
