@@ -141,6 +141,7 @@ void insertion_sort(int array[], int len, unsigned int* befehle) {
 
 // exiting the "while" loop when comparing j with > -1 and array[j] > key returns false
         (*befehle)++;
+        (*befehle)++;
 
 
 // updating the value of array[j+1] to = key;
