@@ -6,94 +6,41 @@ const int MAX_VALUE = 5000000;
 
 void count_sort_calculate_counts(int input_array[], int len, int count_array[], unsigned int* befehle) {
 
-// allocation of i = 1
-    (*befehle)++; 
-    for (int i = 0; i < MAX_VALUE; ++i) {
-// for the looping n times when True "Comparing i with < MAX_VALUE" and adding 1 to i n times ++i
-        (*befehle)++;
-        (*befehle)++;
-
-// updating the value of count_array[i = 0 
-        (*befehle)++;
+    for (int i = 0; i < MAX_LAENGE; ++i) {
         count_array[i] = 0;
-        
     }
-// exiting the "for" loop when comparing i with < MAX_VALUE returns false
-    (*befehle)++; 
 
-// allocation of j = 1
-    (*befehle)++; 
     for (int j = 0; j < len; ++j) {
-// for the looping n times when True "Comparing j with < len" and adding 1 to j n times ++j
-        (*befehle)++;
-        (*befehle)++;
-
-
-// updating the value of count_array[input_array[j]] by adding 1
-        (*befehle)++;
-        count_array[input_array[j]] = count_array[input_array[j]] + 1;
-        
+        count_array[input_array[j]] = count_array[input_array[j]]+1;
     }
-// exiting the "for" loop when comparing j with < len returns false
-    (*befehle)++;
 
 }
-
 
 void count_sort_write_output_array(int output_array[], int len, int count_array[], unsigned int* befehle) {
 
-// allocation of k = 0
-    (*befehle)++; 
     int k = 0;
-
-// allocation of i = 0
-    (*befehle)++; 
-    for (int i = 0; i <= MAX_VALUE; ++i) {
-// for the looping n times when True "Comparing i with <= MAX_VALUE" and adding 1 to i n times ++i
-        (*befehle)++;
-        (*befehle)++;
-
-
-// allocation of j = 0
-        (*befehle)++; 
+    for (int i = 0; i <= MAX_LAENGE; ++i) {
         for (int j = 0; j < count_array[i]; ++j) {
-// for the looping n times when True "Comparing j with < count_array[j]" and adding 1 to j n times ++j
-            (*befehle)++;
-            (*befehle)++;
-
-            
-// updating the value of output_array[k] = i
-            (*befehle)++; // 
             output_array[k] = i;
-
-
-//updatting the value of k by adding 1,  k = k + 1
-            (*befehle)++; 
             k = k + 1;
-            
         }
-// exiting the "for" loop when comparing j with j < count_array[i] returns false
-        (*befehle)++;
-
-
     }
-// exiting the "for" loop when comparing i with i <= MAX_VALUE returns false
-    (*befehle)++;
+    
 }
-
 
 void count_sort(int array[], int len, unsigned int* befehle) {
 
+
 // malloc the array
-    (*befehle)++; 
+    (*befehle)++;
     int* count_array = malloc(MAX_VALUE* sizeof(int));
 
 // calling the function count_sort_calculate_counts
-    (*befehle)++; 
+    (*befehle)++;
     count_sort_calculate_counts(array, len, count_array, befehle);
 
     // calling the function count_sort_write_output_array
-    (*befehle)++; 
+    (*befehle)++;
     count_sort_write_output_array(array, len, count_array, befehle);
 
 
@@ -101,60 +48,24 @@ void count_sort(int array[], int len, unsigned int* befehle) {
     (*befehle)++;
     free(count_array);
 
-}
 
+}
 
 
 void insertion_sort(int array[], int len, unsigned int* befehle) {
 
-// allocation of i = 0
-    (*befehle)++; 
+
     for (int i = 1; i < len; i++) {
-      
-// for the looping n times when True "Comparing i with < len" and adding 1 to i n times ++i
-        (*befehle)++; 
-        (*befehle)++; 
-
-        
-// allocation of key and updating its value to array[i]
-        (*befehle)++; 
+        /* code */
         int key = array[i];
-
-
-//  allocation of j and updating its value to j = i - 1
-        (*befehle)++; 
         int j = i - 1;
-
-        
         while (j > -1 && array[j] > key) {
-//  for the looping when Comparing j with > -1 and Comparing array[j] > key
-            (*befehle)++;
-            (*befehle)++;
-
-// updating the value of array[j+1] to array[j];
-            (*befehle)++;
+            /* code */
             array[j+1] = array[j];
-
-
-// updating the value of j by subtracting 1,  j = j - 1
-            (*befehle)++;
             j = j - 1;
         }
-
-
-// exiting the "while" loop when comparing j with > -1 and array[j] > key returns false
-        (*befehle)++;
-        (*befehle)++;
-
-
-// updating the value of array[j+1] to = key;
-        (*befehle)++;
         array[j+1] = key;
-        
     }
-    
-// exiting the "for" loop when comparing i with i < len returns false
-    (*befehle)++;
 
 }
 
@@ -233,4 +144,3 @@ int main(int argc, char *argv[]) {
 
     return rc;
 }
-
