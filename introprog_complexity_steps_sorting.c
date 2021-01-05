@@ -84,7 +84,8 @@ void count_sort_write_output_array(int output_array[], int len, int count_array[
 
 void count_sort(int array[], int len, unsigned int* befehle) {
 
-
+// malloc the array
+    (*befehle)++; 
     int* count_array = malloc(MAX_VALUE* sizeof(int));
 
 // calling the function count_sort_calculate_counts
