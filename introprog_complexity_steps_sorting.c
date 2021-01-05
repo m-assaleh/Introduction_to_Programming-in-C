@@ -6,7 +6,7 @@ const int MAX_VALUE = 5000000;
 
 void count_sort_calculate_counts(int input_array[], int len, int count_array[], unsigned int* befehle) {
 
-    for (int i = 0; i < MAX_LAENGE; ++i) {
+    for (int i = 0; i < MAX_VALUE; ++i) {
         count_array[i] = 0;
     }
 
@@ -19,13 +19,13 @@ void count_sort_calculate_counts(int input_array[], int len, int count_array[], 
 void count_sort_write_output_array(int output_array[], int len, int count_array[], unsigned int* befehle) {
 
     int k = 0;
-    for (int i = 0; i <= MAX_LAENGE; ++i) {
+    for (int i = 0; i <= MAX_VALUE; ++i) {
         for (int j = 0; j < count_array[i]; ++j) {
             output_array[k] = i;
             k = k + 1;
         }
     }
-    
+
 }
 
 void count_sort(int array[], int len, unsigned int* befehle) {
