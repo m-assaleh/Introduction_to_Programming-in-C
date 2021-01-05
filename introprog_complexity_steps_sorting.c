@@ -48,8 +48,8 @@ void count_sort_write_output_array(int output_array[], int len, int count_array[
 
 // allocation of i = 0
     (*befehle)++; 
-    for (int i = 0; i <= MAX_VALUE; ++i) {
-// for the looping n times when True "Comparing i with <= MAX_VALUE" and adding 1 to i n times ++i
+    for (int i = 0; i < MAX_VALUE; ++i) {
+// for the looping n times when True "Comparing i with < MAX_VALUE" and adding 1 to i n times ++i
         (*befehle)++;
         (*befehle)++;
 
@@ -77,7 +77,7 @@ void count_sort_write_output_array(int output_array[], int len, int count_array[
 
 
     }
-// exiting the "for" loop when comparing i with i <= MAX_VALUE returns false
+// exiting the "for" loop when comparing i with i < MAX_VALUE returns false
     (*befehle)++;
 }
 
