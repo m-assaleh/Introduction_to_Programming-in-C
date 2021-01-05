@@ -1,233 +1,192 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "introprog_complexity_steps_input.h"
 
-const int MAX_VALUE = 5000000;
+long for_linear(int n, int* befehle)
+{
 
-void count_sort_calculate_counts(int input_array[], int len, int count_array[], unsigned int* befehle) {
+// allocation of sum = 0
+    long sum =0;
+    (*befehle)++;
+
 
 // allocation of i = 1
-    (*befehle)++; 
-    for (int i = 0; i < MAX_LAENGE; ++i) {
-// for the looping n times when True "Comparing i with < MAX_LAENGE" and adding 1 to i n times ++i
+    (*befehle)++;
+    for (int i = 1; i <= n ; ++i) {
+        //  for looping n times when True "Comparing i with <= n" and adding 1 to i n times ++i
         (*befehle)++;
         (*befehle)++;
 
-// updating the value of count_array[i = 0 
+
+        sum += get_value_one();
+        // updating the value of sum with sum + get_value_one()
         (*befehle)++;
-        count_array[i] = 0;
-        
+
     }
-// exiting the "for" loop when comparing i with < MAX_LAENGE returns false
-    (*befehle)++; 
 
-    // allocation of j = 1
-    (*befehle)++; 
-    for (int j = 0; j < len; ++j) {
-// for the looping n times when True "Comparing j with < len" and adding 1 to j n times ++j
-        (*befehle)++;
-        (*befehle)++;
-
-
-// updating the value of count_array[input_array[j]] by adding 1
-        (*befehle)++;
-        count_array[input_array[j]] = count_array[input_array[j]] + 1;
-        
-    }
-// exiting the "for" loop when comparing j with < len returns false
+    // exiting the "for" loop when comparing i with <= n returns false
     (*befehle)++;
 
-}
 
-
-void count_sort_write_output_array(int output_array[], int len, int count_array[], unsigned int* befehle) {
-
-// allocation of k = 0
-    (*befehle)++; 
-    int k = 0;
-
-// allocation of i = 0
-    (*befehle)++; 
-    for (int i = 0; i <= MAX_LAENGE; ++i) {
-// for the looping n times when True "Comparing i with <= MAX_LAENGE" and adding 1 to i n times ++i
-        (*befehle)++;
-        (*befehle)++;
-
-
-// allocation of j = 0
-        (*befehle)++; 
-        for (int j = 0; j < count_array[i]; ++j) {
-// for the looping n times when True "Comparing j with < count_array[j]" and adding 1 to j n times ++j
-            (*befehle)++;
-            (*befehle)++;
-
-            
-// updating the value of output_array[k] = i
-            (*befehle)++; // 
-            output_array[k] = i;
-
-
-//updatting the value of k by adding 1,  k = k + 1
-            (*befehle)++; 
-            k = k + 1;
-            
-        }
-// exiting the "for" loop when comparing j with j < count_array[i] returns false
-        (*befehle)++;
-
-
-    }
-// exiting the "for" loop when comparing i with i <= MAX_LAENGE returns false
+// returning the function output
     (*befehle)++;
+    return sum;
 }
 
 
-void count_sort(int array[], int len, unsigned int* befehle) {
+long for_quadratisch(int n, int* befehle)
+{
+
+    // allocation of sum = 0
+    long sum = 0;
+    (*befehle)++;
 
 
-    int* count_array = malloc(MAX_VALUE* sizeof(int));
-
-// calling the function count_sort_calculate_counts
-    (*befehle)++; 
-    count_sort_calculate_counts(array, len, count_array, befehle);
-
-    // calling the function count_sort_write_output_array
-    (*befehle)++; 
-    count_sort_write_output_array(array, len, count_array, befehle);
+    // allocation of i = 1
+    (*befehle)++;
+    for(int i = 1; i <= n; ++i) {
+        //  for the looping n times when True "Comparing i with <= n" and adding 1 to i n times ++i
+        (*befehle)++;
+        (*befehle)++;
 
 
-    free(count_array);
-
-}
-
-
-
-void insertion_sort(int array[], int len, unsigned int* befehle) {
-
-// allocation of i = 0
-    (*befehle)++; 
-    for (int i = 1; i < len; i++) {
-      
-// for the looping n times when True "Comparing i with < len" and adding 1 to i n times ++i
-        (*befehle)++; 
-        (*befehle)++; 
-
-        
-// allocation of key and updating its value to array[i]
-        (*befehle)++; 
-        int key = array[i];
-
-
-//  allocation of j and updating its value to j = i - 1
-        (*befehle)++; 
-        int j = i - 1;
-
-        
-        while (j > -1 && array[j] > key) {
-//  for the looping when Comparing j with > -1 and Comparing array[j] > key
+        // allocation of j = 1
+        (*befehle)++;
+        for(int j = 1; j <= n; ++j) {
+            //  for the looping n times when True "Comparing j with <= n" and adding 1 to j n times ++j
             (*befehle)++;
             (*befehle)++;
 
-// updating the value of array[j+1] to array[j];
-            (*befehle)++;
-            array[j+1] = array[j];
 
-
-// updating the value of j by subtracting 1,  j = j - 1
+            sum += get_value_one();
+            // updating the value of sum with sum + get_value_one()
             (*befehle)++;
-            j = j - 1;
+
         }
 
-
-// exiting the "while" loop when comparing j with > -1 and array[j] > key returns false
-        (*befehle)++;
+        // exiting the "for" loop when comparing j with <= n returns false
         (*befehle)++;
 
-
-// updating the value of array[j+1] to = key;
-        (*befehle)++;
-        array[j+1] = key;
-        
     }
-    
-// exiting the "for" loop when comparing i with i < len returns false
+
+    // exiting the "for" loop when comparing i with <= n returns false
     (*befehle)++;
 
+
+// returning the function output
+    (*befehle)++;
+    return sum;
 }
 
 
-int main(int argc, char *argv[]) {
-    const int WERTE[] = {10000,20000,30000,40000,50000};
-    const int LEN_WERTE = 5;
-    const int LEN_ALGORITHMEN = 2;
+long for_kubisch(int n, int* befehle)
+{
 
-    int rc = 0;
-    unsigned int befehle_array[LEN_ALGORITHMEN][LEN_WERTE];
+    // allocation of sum = 0
+    long sum = 0;
+    (*befehle)++;
+
+
+    // allocation of i = 1
+    (*befehle)++;
+    for(int i = 1; i <= n; ++i) {
+        //  for the looping n times when True "Comparing i with <= n" and adding 1 to i n times ++i
+        (*befehle)++;
+        (*befehle)++;
+
+
+        // allocation of j = 1
+        (*befehle)++;
+        for(int j = 1; j <= n; ++j) {
+            //  for the looping n times when True "Comparing j with <= n" and adding 1 to j n times ++j
+            (*befehle)++;
+            (*befehle)++;
+
+
+            // allocation of k = 1
+            (*befehle)++;
+            for(int k = 1; k <= n; ++k) {
+                //  for the looping n times when True "Comparing k with <= n" and adding 1 to k n times ++k
+                (*befehle)++;
+                (*befehle)++;
+
+
+                sum += get_value_one();
+                // updating the value of sum with sum + get_value_one()
+                (*befehle)++;
+
+            }
+
+            // exiting the "for" loop when comparing k with <= n returns false
+            (*befehle)++;
+        }
+
+        // exiting the "for" loop when comparing j with <= n returns false
+        (*befehle)++;
+    }
+
+    // exiting the "for" loop when comparing i with <= n returns false
+    (*befehle)++;
+
+
+// returning the function output
+    (*befehle)++;
+    return sum;
+}
+
+
+int main(int argc, char *argv[])
+{
+    const int WERTE[] = {5,6,7,8,9,10};
+    const int LEN_WERTE = 6;
+    const int LEN_ALGORITHMEN = 3;
+
+    long befehle_array[LEN_ALGORITHMEN][LEN_WERTE];
+    long werte_array[LEN_ALGORITHMEN][LEN_WERTE];
     double laufzeit_array[LEN_ALGORITHMEN][LEN_WERTE];
 
     for(int j = 0; j < LEN_WERTE; ++j) {
         int n = WERTE[j];
-
-        // Reserviere Speicher für  Arrays der Länge n
-        int* array_countsort = malloc(sizeof(int) * n);
-        int* array_insertionsort = malloc(sizeof(int) * n);
-
-        // Fülle array_countsort mit Zufallswerten ..
-        fill_array_randomly(array_countsort, n, MAX_VALUE);
-        // ... und kopiere die erzeugten Werte in das Array
-        // array_insertionsort
-        copy_array_elements(array_insertionsort, array_countsort, n);
-
-        // Teste ob beide Arrays auch wirklich die gleichen Werte
-        // enthalten
-        if(!check_equality_of_arrays(array_countsort, array_insertionsort, n)) {
-            printf("Die Eingaben für beide Algorithmen müssen für die Vergleichbarkeit gleich sein!\n");
-            return -1;
-        }
-
         for(int i = 0; i < LEN_ALGORITHMEN; ++i) {
-            unsigned int anzahl_befehle = 0;
+            printf("Starte Algorithmus %d mit Wert %d\n",
+                   (i+1), n);
+            int anzahl_befehle = 0;
+            int wert = 0;
 
+            // Starte den Timer
             start_timer();
 
-            // Aufruf der entsprechenden Sortieralgorithmen
+            // Aufruf der entsprechenden Funktion
             if(i==0) {
-                    count_sort(array_countsort, n, &anzahl_befehle);
-            } else if(i==1) {
-                    insertion_sort(array_insertionsort, n, &anzahl_befehle);
+                wert = for_linear(n, &anzahl_befehle);
+            }
+            else if(i==1) {
+                wert = for_quadratisch(n, &anzahl_befehle);
+            }
+            else if(i==2) {
+                wert = for_kubisch(n, &anzahl_befehle);
             }
 
-            // Speichere die Laufzeit sowie die Anzahl benötigter
-            // Befehle
+            // Speichere Laufzeit, Rückgabewert und Anzahl
+            // ausgeführter Befehle ab
             laufzeit_array[i][j] = end_timer();
+            werte_array[i][j] = wert;
             befehle_array[i][j] = anzahl_befehle;
-        }
-
-        // Teste, ob die Ausgabe beider Algorithmen gleich sind
-        if(!check_equality_of_arrays(array_countsort, array_insertionsort, n)) {
-            printf("Die Arrays sind nicht gleich. Eines muss (falsch) sortiert worden sein!\n");
-            rc = -1;
-        }
-
-        // Gib den Speicherplatz wieder frei
-        free(array_countsort);
-        free(array_insertionsort);
-    }
-
-    // Ausgabe der Anzahl ausgeführter Befehle sowie der gemessenen
-    // Laufzeiten (in Millisekunden)
-    printf("Parameter MAX_VALUE hat den Wert %d\n", MAX_VALUE);
-    printf("\t %32s           %32s \n", "Countsort","Insertionsort");
-    printf("%8s \t %16s %16s \t %16s %16s \n", "n","Befehle", "Laufzeit","Befehle","Laufzeit");
-
-    for(int j = 0; j < LEN_WERTE; ++j) {
-        printf("%8d \t ",WERTE[j]);
-        for(int i = 0; i < LEN_ALGORITHMEN; ++i) {
-            printf("%16u %16.4f \t ",  befehle_array[i][j], laufzeit_array[i][j]);
         }
         printf("\n");
     }
 
-    return rc;
-}
+    // Ausgabe der Rückgabewerte, Anzahl ausgeführter Befehle
+    // sowie der gemessenen Laufzeiten (in Millisekunden)
+    printf("%3s \t%-28s \t%-28s \t%-28s\n", "","linear", "quadratisch", "kubisch");
+    printf("%3s \t %5s %10s %10s\t %5s %10s %10s\t %5s %10s %10s\n", "n","Wert","Befehle","Laufzeit","Wert","Befehle","Laufzeit","Wert","Befehle","Laufzeit");
 
+    for(int j = 0; j < LEN_WERTE; ++j) {
+        printf("%3d \t ",WERTE[j]);
+        for(int i = 0; i < LEN_ALGORITHMEN; ++i) {
+            printf("%5ld %10ld %10.4f \t ", werte_array[i][j], befehle_array[i][j], laufzeit_array[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
