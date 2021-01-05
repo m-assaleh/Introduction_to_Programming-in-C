@@ -97,6 +97,8 @@ void count_sort(int array[], int len, unsigned int* befehle) {
     count_sort_write_output_array(array, len, count_array, befehle);
 
 
+// freeing malloc the array
+    (*befehle)++;
     free(count_array);
 
 }
