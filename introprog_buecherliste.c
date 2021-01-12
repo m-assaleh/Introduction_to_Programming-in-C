@@ -88,7 +88,7 @@ void free_list(list *alist) {
         element = element -> next;
         free(old); }
 
-
+    free(alist);
 
 }
 
@@ -112,7 +112,7 @@ void read_list(char* filename, list *alist) {
 }
 
 /* Erstelle die Liste:
- *  - Weise ihr dynamischen Speicher zu 
+ *  - Weise ihr dynamischen Speicher zu
  *  - Initialisiere die enthaltenen Variablen
  * _Soll nicht angepasst werden_
  */
