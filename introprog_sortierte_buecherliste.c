@@ -46,8 +46,35 @@ typedef struct _list { /* Separater Wurzelknoten */
  */
 
 element* insert_sorted(element *first, element *new_elem) {
-
     
+    element *before, *ele, *holder;
+    holder = new_elem;
+    if(!first) {
+        first = holder;
+    } else {
+        ele = first;
+        before = NULL;
+        while(ele -> isbn <= holder -> isbn && current) {
+            before = ele;
+            current = ele -> next;
+        }
+
+        
+        if(!ele) {
+            before -> next = holder;
+        } else {
+            if(before) {
+                holder -> next = before -> next;
+                before -> next = holder;
+            } else {
+                holder -> next = first;
+                first = holder;
+            }
+        }
+    }
+    
+    return first;
+}
 
 /* Kreiere ein neues Element mit dynamischem Speicher.
  *
@@ -83,13 +110,13 @@ void free_list(list *alist) {
     /* HIER implementieren. */
 
     element *element = alist -> first;
-    struct _element *elm;
+    struct _element *ele;
 
     while(element) {
-        elm = element;
+        ele = element;
         element = element -> next;
 
-        free(elm);  }
+        free(ele);  }
 
     free(element);
 
