@@ -45,44 +45,40 @@ typedef struct _list { /* Separater Wurzelknoten */
  */
 
 
- element *insert_sorted(element *first, element *new_elem) 
- {
- 	element *prev, *current, *temp;
- 	temp = new_elem;
- 	if(!first) 
- 	{
- 		first = temp; 
- 	}
- 	else {
- 		current = first;
- 		prev = NULL;
- 		while(current && current -> isbn <= temp -> isbn) 
- 		{
- 			prev = current;
- 			current = current -> next; 
+ element *insert_sorted(element *first, element *new_elem) {
+   
+ 	element *bef, *eleme, *pholder;
+  
+ 	pholder = new_elem;
+  
+ 	if(!first) {
+ 		first = pholder; 
+ 	} else {
+ 		eleme = first;
+ 		bef = NULL;
+ 		while(eleme && eleme -> isbn <= pholder -> isbn) {
+ 			bef = eleme;
+ 			eleme = eleme -> next; 
  		}
- 		if(!current) 
- 		{
- 			prev -> next = temp; 
- 		}
- 		else 
- 		{
- 			if(prev) 
- 			{
- 			temp -> next = prev -> next;
- 			prev -> next = temp; 
+    
+ 		if(!eleme){
+ 			bef -> next = pholder; 
+ 		} else {
+ 			if(bef){
+ 			pholder -> next = bef -> next;
+ 			bef -> next = pholder; 
+ 			} else {
+ 			pholder -> next = first;
+ 			first = pholder; 
  			}
- 			else 
- 			{
- 			temp -> next = first;
- 			first = temp; 
- 			}
- 		}
+      
+ 		}  
+    
  	}
+  
  	return first;
+  
  }
-
-
 
 /* Kreiere ein neues Element mit dynamischem Speicher.
  *
