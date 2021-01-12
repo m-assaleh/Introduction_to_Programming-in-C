@@ -8,15 +8,14 @@
 /* Bewirkt, dass statt 'struct _element' auch 'element' verwendet
  * werden kann.
  */
-typedef struct _element element;
+typedef struct _element{;
 
-struct element {
-    char titel[255];
+    char title[255];
     char author[255];
     int year;
     long long int isbn;
-    element *next;
-};
+    struct _element *next;
+} element;
 
 /* Bewirkt, dass statt 'struct _list' auch 'list' verwendet werden
  * kann.  Hier in einem geschrieben, so dass man auch 'list'
@@ -62,10 +61,10 @@ element *construct_element(char *title, char* author, int year, long long int is
 
 
 
-    element * book = malloc (sizeof(element));
-    stpcpy(book -> title, title, 254);
-    stpcpy(book -> author, author, 254);
-    
+    element *book = malloc (sizeof(element));
+    strpcpy(book -> title, title, 254);
+    strpcpy(book -> author, author, 254);
+
     book -> title[254] = '\0';
     book -> author[254] = '\0';
     book -> year = year;
