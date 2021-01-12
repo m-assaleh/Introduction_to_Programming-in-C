@@ -45,7 +45,7 @@ element *insert_at_begin(element *first, element *new_elem) {
     first -> next;
     next -> new_elem;
 
-    return first
+    return first;
 }
 
 /* Kreiere ein neues Element mit dynamischem Speicher.
@@ -88,7 +88,7 @@ void free_list(list *alist) {
         element = element -> next;
         free(old); }
 
-  
+
 
 }
 
