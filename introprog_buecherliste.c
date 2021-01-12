@@ -62,14 +62,17 @@ element *construct_element(char *title, char* author, int year, long long int is
 
 
 
-    element * book =(element*) malloc(sizeof(element));
+    element * book = malloc (sizeof(element));
+    stpcpy(book -> title, title, 254);
+    stpcpy(book -> author, author, 254);
+    
     book -> title[254] = '\0';
     book -> author[254] = '\0';
     book -> year = year;
     book -> isbn = isbn;
-    book -> next = Null;
+    book -> next = NULL;
     return book;
-    
+
 }
 
 /* Gib den der Liste und all ihrer Elemente zugewiesenen
@@ -86,7 +89,7 @@ void free_list(list *alist) {
         free(old); }
 
     free(element);
-    
+
     free(alist);
 
 }
