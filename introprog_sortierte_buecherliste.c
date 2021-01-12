@@ -46,7 +46,7 @@ typedef struct _list { /* Separater Wurzelknoten */
  */
 
 element* insert_sorted(element *first, element *new_elem) {
-    
+
     element *before, *ele, *holder;
     holder = new_elem;
     if(!first) {
@@ -54,12 +54,12 @@ element* insert_sorted(element *first, element *new_elem) {
     } else {
         ele = first;
         before = NULL;
-        while(ele -> isbn <= holder -> isbn && current) {
+        while(ele -> isbn <= holder -> isbn && ele) {
             before = ele;
-            current = ele -> next;
+            ele = ele -> next;
         }
 
-        
+
         if(!ele) {
             before -> next = holder;
         } else {
@@ -72,7 +72,7 @@ element* insert_sorted(element *first, element *new_elem) {
             }
         }
     }
-    
+
     return first;
 }
 
