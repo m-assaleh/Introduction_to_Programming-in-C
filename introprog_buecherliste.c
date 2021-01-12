@@ -11,11 +11,11 @@
 typedef struct _element element;
 
 struct element {
-    char titel[MAX_STR];
-    char author[MAX_STR];
+    char titel[255];
+    char author[255];
     int year;
     long long int isbn;
-    _element *next;
+    element *next;
 };
 
 /* Bewirkt, dass statt 'struct _list' auch 'list' verwendet werden
@@ -42,8 +42,8 @@ typedef struct _list { /* Separater Wurzelknoten */
 element *insert_at_begin(element *first, element *new_elem) {
     /* HIER implementieren. */
 
-    first -> next;
-    next -> new_elem;
+    new_elem -> next = first;
+    first = new_elem;
 
     return first;
 }
@@ -63,16 +63,13 @@ element *construct_element(char *title, char* author, int year, long long int is
 
 
     element * book =(element*) malloc(sizeof(element));
-    book -> title = title;
-    book -> author = author;
+    book -> title[254] = '\0';
+    book -> author[254] = '\0';
     book -> year = year;
     book -> isbn = isbn;
     book -> next = Null;
-
     return book;
-
-
-
+    
 }
 
 /* Gib den der Liste und all ihrer Elemente zugewiesenen
@@ -89,6 +86,7 @@ void free_list(list *alist) {
         free(old); }
 
     free(element);
+    
     free(alist);
 
 }
