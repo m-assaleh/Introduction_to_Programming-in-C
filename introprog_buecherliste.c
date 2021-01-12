@@ -61,12 +61,14 @@ element *insert_at_begin(element *first, element *new_elem) {
  *
  * Gib einen Pointer auf das neue Element zurueck.
  */
+
 element *construct_element(char *title, char* author, int year, long long int isbn) {
     /* HIER implementieren. */
 
     element * book = (element*) malloc(sizeof (element));
- strncpy(book -> title, title, 254);
- strncpy(book -> author, author, 254)
+
+    strncpy(book -> title, title, 254);
+    strncpy(book -> author, author, 254)
     book -> title = '\0';
     book -> author = '\0';
     book -> year = year;
@@ -75,27 +77,27 @@ element *construct_element(char *title, char* author, int year, long long int is
 
     return book;
 
-
 }
 
 /* Gib den der Liste und all ihrer Elemente zugewiesenen
  * Speicher frei.
  */
+
 void free_list(list *alist) {
     /* HIER implementieren. */
 
     element *element = alist -> first;
     struct _element *el;
+
     while(element) {
         el = element;
         element = element -> next;
-        free(el); }
 
+        free(el);  }
 
     free(element);
 
     free(alist);
-
 
 }
 
