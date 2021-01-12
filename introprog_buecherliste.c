@@ -65,10 +65,10 @@ element *construct_element(char *title, char* author, int year, long long int is
     /* HIER implementieren. */
 
     element * book = (element*) malloc(sizeof (element));
-// strncpy(book -> title, title, 254);
-// strncpy(book -> author, author, 254)
-    book -> title[254] = '\0';
-    book -> author[254] = '\0';
+ strncpy(book -> title, title, 254);
+ strncpy(book -> author, author, 254)
+    book -> title = '\0';
+    book -> author = '\0';
     book -> year = year;
     book -> isbn = isbn;
     book -> next = NULL;
