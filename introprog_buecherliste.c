@@ -8,7 +8,15 @@
 /* Bewirkt, dass statt 'struct _element' auch 'element' verwendet
  * werden kann.
  */
-typedef struct _element element; 
+typedef struct _element element;
+
+struct element {
+    char titel[MAX_STR];
+    char author[MAX_STR];
+    int year;
+    long long int isbn;
+    element *next;
+};
 
 /* Bewirkt, dass statt 'struct _list' auch 'list' verwendet werden
  * kann.  Hier in einem geschrieben, so dass man auch 'list'
@@ -33,6 +41,11 @@ typedef struct _list { /* Separater Wurzelknoten */
  */
 element *insert_at_begin(element *first, element *new_elem) {
     /* HIER implementieren. */
+
+    first -> next;
+    next -> new_elem;
+
+    return first
 }
 
 /* Kreiere ein neues Element mit dynamischem Speicher.
@@ -46,6 +59,20 @@ element *insert_at_begin(element *first, element *new_elem) {
  */
 element *construct_element(char *title, char* author, int year, long long int isbn) {
     /* HIER implementieren. */
+
+
+
+    element * book =(element*) malloc(sizeof(element));
+    book -> title = title;
+    book -> author = author;
+    book -> year = year;
+    book -> isbn = isbn;
+    book -> next = Null;
+
+    return book;
+
+
+
 }
 
 /* Gib den der Liste und all ihrer Elemente zugewiesenen
@@ -53,9 +80,19 @@ element *construct_element(char *title, char* author, int year, long long int is
  */
 void free_list(list *alist) {
     /* HIER implementieren. */
+
+    element *element = alist -> first;
+    struct _element *old;
+    while(element){
+        old = element;
+        element = element -> next;
+        free(old); }
+
+  
+
 }
 
-/* Lese die Datei ein und fuege neue Elemente in die Liste ein 
+/* Lese die Datei ein und fuege neue Elemente in die Liste ein
  * _Soll nicht angepasst werden_
  */
 void read_list(char* filename, list *alist) {
