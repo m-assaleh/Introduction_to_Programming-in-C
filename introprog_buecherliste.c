@@ -10,8 +10,8 @@
  */
 typedef struct _element{;
 
-    char title[255];
-    char author[255];
+    char title[MAX_STR];
+    char author[MAX_STR];
     int year;
     long long int isbn;
     struct _element *next;
@@ -61,9 +61,10 @@ element *construct_element(char *title, char* author, int year, long long int is
 
 
 
-    element *book = malloc (sizeof(element));
-    strpcpy(book -> title, title, 254);
-    strpcpy(book -> author, author, 254);
+    element *book = (element*) malloc(sizeof(element));
+
+    strncpy(book -> title, title, 254);
+    strncpy(book -> author, author, 254);
 
     book -> title[254] = '\0';
     book -> author[254] = '\0';
