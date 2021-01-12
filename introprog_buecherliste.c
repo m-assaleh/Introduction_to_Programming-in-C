@@ -15,7 +15,7 @@ struct element {
     char author[MAX_STR];
     int year;
     long long int isbn;
-    element *next;
+    _element *next;
 };
 
 /* Bewirkt, dass statt 'struct _list' auch 'list' verwendet werden
@@ -88,6 +88,7 @@ void free_list(list *alist) {
         element = element -> next;
         free(old); }
 
+    free(element);
     free(alist);
 
 }
