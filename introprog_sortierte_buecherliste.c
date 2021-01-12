@@ -8,7 +8,7 @@
 /* Bewirkt, dass statt 'struct _element' auch 'element' verwendet
  * werden kann.
  */
-typedef struct _element element;
+typedef struct _element element; 
 
 struct _element {
     char title [MAX_STR];
@@ -24,7 +24,6 @@ struct _element {
  * kann.  Hier in einem geschrieben, so dass man auch 'list'
  * innerhalb der struct-Definition selbst verwenden kann.
  */
-
 typedef struct _list { /* Separater Wurzelknoten */
     element *first;    /* Anfang/Kopf der Liste */
     int count;         /* Anzahl der Elemente */
@@ -45,36 +44,45 @@ typedef struct _list { /* Separater Wurzelknoten */
  * zurueck.
  */
 
-element* insert_sorted(element *first, element *new_elem) {
 
-    element *before, *ele, *holder;
-    holder = new_elem;
-    if(!first) {
-        first = holder;
-    } else {
-        ele = first;
-        before = NULL;
-        while(ele -> isbn <= holder -> isbn && ele) {
-            before = ele;
-            ele = ele -> next;
-        }
+ element *insert_sorted(element *first, element *new_elem) 
+ {
+ 	element *prev, *current, *temp;
+ 	temp = new_elem;
+ 	if(!first) 
+ 	{
+ 		first = temp; 
+ 	}
+ 	else {
+ 		current = first;
+ 		prev = NULL;
+ 		while(current && current -> isbn <= temp -> isbn) 
+ 		{
+ 			prev = current;
+ 			current = current -> next; 
+ 		}
+ 		if(!current) 
+ 		{
+ 			prev -> next = temp; 
+ 		}
+ 		else 
+ 		{
+ 			if(prev) 
+ 			{
+ 			temp -> next = prev -> next;
+ 			prev -> next = temp; 
+ 			}
+ 			else 
+ 			{
+ 			temp -> next = first;
+ 			first = temp; 
+ 			}
+ 		}
+ 	}
+ 	return first;
+ }
 
 
-        if(!ele) {
-            before -> next = holder;
-        } else {
-            if(before) {
-                holder -> next = before -> next;
-                before -> next = holder;
-            } else {
-                holder -> next = first;
-                first = holder;
-            }
-        }
-    }
-
-    return first;
-}
 
 /* Kreiere ein neues Element mit dynamischem Speicher.
  *
@@ -85,46 +93,47 @@ element* insert_sorted(element *first, element *new_elem) {
  *
  * Gib einen Pointer auf das neue Element zurueck.
  */
-element *construct_element(char *title, char* author, int year, long long int isbn) {
-    /* HIER implementieren. */
+ 
+ element *construct_element(char *title, char* author, int year, long long int isbn) {
+     /* HIER implementieren. */
 
-    element * book = (element*) malloc(sizeof (element));
+     element * book = (element*) malloc(sizeof (element));
 
-    strncpy(book -> title, title, 254);
-    strncpy(book -> author, author, 254);
-    book -> title[254] = '\0';
-    book -> author[254] = '\0';
-    book -> year = year;
-    book -> isbn = isbn;
-    book -> next = NULL;
+     strncpy(book -> title, title, 254);
+     strncpy(book -> author, author, 254);
+     book -> title[254] = '\0';
+     book -> author[254] = '\0';
+     book -> year = year;
+     book -> isbn = isbn;
+     book -> next = NULL;
 
-    return book;
+     return book;
 
-}
+ }
 
 /* Gib den der Liste und all ihrer Elemente zugewiesenen
  * Speicher frei.
  */
+ 
+ void free_list(list *alist) {
+     /* HIER implementieren. */
 
-void free_list(list *alist) {
-    /* HIER implementieren. */
+     element *element = alist -> first;
+     struct _element *el;
 
-    element *element = alist -> first;
-    struct _element *ele;
+     while(element) {
+         el = element;
+         element = element -> next;
 
-    while(element) {
-        ele = element;
-        element = element -> next;
+         free(el);  }
 
-        free(ele);  }
+     free(element);
 
-    free(element);
+     free(alist);
 
-    free(alist);
+ }
 
-}
-
-/* Lese die Datei ein und fuege neue Elemente in die Liste ein
+/* Lese die Datei ein und fuege neue Elemente in die Liste ein 
  * _Soll nicht angepasst werden_
  */
 void read_list(char* filename, list *alist) {
@@ -143,7 +152,7 @@ void read_list(char* filename, list *alist) {
 }
 
 /* Erstelle die Liste:
- *  - Weise ihr dynamischen Speicher zu
+ *  - Weise ihr dynamischen Speicher zu 
  *  - Initialisiere die enthaltenen Variablen
  * _Soll nicht angepasst werden_
  */
