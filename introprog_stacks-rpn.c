@@ -74,13 +74,11 @@ return x;
  */
 
 void process(stack* astack, char* token) {
-    float x, y, result;
+    float x;
+    float y;
+    float result;
 
-    if ((x == NAN) &&(y == NAN )){
-        stack_push(astack, NAN);
 
-    }
-  else  {
 
 
         if (is_add(token) == 1) {
@@ -115,7 +113,7 @@ void process(stack* astack, char* token) {
             printf("\n<Logik fehlt!>\n");
             return;
 
-        }
+
 
 
     }
@@ -191,4 +189,3 @@ int main(int argc, char** args)
     }
     free(astack);
 }
-
