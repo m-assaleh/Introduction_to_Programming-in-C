@@ -16,7 +16,7 @@ struct _stack_element {
     float value;
 };
 
-/* 
+/*
  * Füge Element am Anfang des Stacks ein
  *
  * astack - Ein Pointer auf den Stack.
@@ -31,9 +31,9 @@ void stack_push(stack* astack, float value)
   x -> next = astack -> top;
   astack -> top = x;
 
-}
+} 
 
-/* 
+/*
  * Nehme das letzte eingefügte Element vom Anfang des Stacks
  * Gebe NaN zurück, wenn keine Element vorhanden ist.
  *
@@ -43,12 +43,12 @@ void stack_push(stack* astack, float value)
  */
 float stack_pop(stack* astack)
 {
-    
+
     float x =astack -> top -> value;
-    
+
     astack -> top = astack -> top -> next;
-    free(astack -> top);
-    
+    free(astack -> value);
+
     return x;
 }
 
@@ -64,7 +64,7 @@ float stack_pop(stack* astack)
  * astack - Ein Pointer auf den Stack
  * token  - Eine Zeichenkette
  */
- 
+
  void process(stack* astack, char* token)
  {
      float x,y,result;
@@ -107,7 +107,7 @@ float stack_pop(stack* astack)
  }
 
 
-/* 
+/*
  * Debugausgabe des Stack
  * Diese Funktion kannst du zum debugging des Stack verwenden.
  *
@@ -125,7 +125,7 @@ void print_stack(stack *astack) {
     printf(" |xxxxx|xxxxxxxxxxxxxxxxxxx|xxxxxxxxxxxxxxxxxxx|xxxxxxxxx|\n");
 }
 
-/* 
+/*
  * Erstelle einen Stack mit dynamischem Speicher.
  * Initialisiere die enthaltenen Variablen.
  *
