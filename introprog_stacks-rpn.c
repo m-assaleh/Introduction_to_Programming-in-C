@@ -30,6 +30,7 @@ void stack_push(stack* astack, float value)
     x -> value = value;
     if (astack -> top == NULL){
         astack -> top = x;
+
     } else {
         x -> next = astack->top;
         astack->top = x;
@@ -46,18 +47,19 @@ void stack_push(stack* astack, float value)
  */
 float stack_pop(stack* astack)
 {
+    stack_element* y;
     if (astack -> top == NULL){
         return NAN;
 
     } else {
-        stack_element *y;
-        float x = astack->top->value;
-        y = astack->top->next;
 
-        free(astack->top);
+        float x;
+        x = astack -> top ->value;
+        y = astack -> top -> next;
+        free(astack -> top);
 
-        astack ->top=y;
-        return x;
+        astack -> top = y;
+return x;
     }
 }
 
@@ -74,45 +76,51 @@ float stack_pop(stack* astack)
  * token  - Eine Zeichenkette
  */
 
-void process(stack* astack, char* token)
-{
-    float x,y,result;
+void process(stack* astack, char* token) {
+    float x, y, result;
 
-    if (is_add(token)==1){
-
-        x = stack_pop(astack);
-        y = stack_pop(astack);
-
-        result = x + y;
-        stack_push(astack, result);
-
-    } else if (is_sub(token)==1){
-
-        x = stack_pop(astack);
-        y = stack_pop(astack);
-        result = x - y;
-        stack_push(astack, result);
-
-    } else if (is_mult(token)==1){
-
-        x = stack_pop(astack);
-        y = stack_pop(astack);
-        result = x * y;
-        stack_push(astack, result);
-
-    } else if (is_number(token)==1){
-
-        x = atof(token);
-        stack_push(astack, x);
-
-    } else {
-
-        printf("\n<Logik fehlt!>\n");
+    if ((x == NAN) &&(y == NAN )){
+        stack_push(astack, NAN);
 
     }
+  else  {
 
-    return;
 
+        if (is_add(token) == 1) {
+
+            x = stack_pop(astack);
+            y = stack_pop(astack);
+
+            result = x + y;
+            stack_push(astack, result);
+
+        } else if (is_sub(token) == 1) {
+
+            x = stack_pop(astack);
+            y = stack_pop(astack);
+            result = x - y;
+            stack_push(astack, result);
+
+        } else if (is_mult(token) == 1) {
+
+            x = stack_pop(astack);
+            y = stack_pop(astack);
+            result = x * y;
+            stack_push(astack, result);
+
+        } else if (is_number(token) == 1) {
+
+            x = atof(token);
+            stack_push(astack, x);
+
+        } else {
+
+            printf("\n<Logik fehlt!>\n");
+
+        }
+
+        return;
+    }
 }
 
 
@@ -141,7 +149,7 @@ void print_stack(stack *astack) {
  * Gebe einen Pointer auf den Stack zurück.
  */
 stack* stack_erstellen() {
-    stack * x = malloc(sizeof(stack));
+    stack * x = (stack*)malloc(sizeof(stack));
     x -> top = NULL;
     return x;
 
