@@ -47,7 +47,7 @@ float stack_pop(stack* astack)
     float x =astack -> top -> value;
 
     astack -> top = astack -> top -> next;
-    free(astack -> value);
+    free(astack);
 
     return x;
 }
