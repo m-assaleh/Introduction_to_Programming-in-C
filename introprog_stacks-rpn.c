@@ -16,7 +16,7 @@ struct _stack_element {
     float value;
 };
 
-/* 
+/*
  * Füge Element am Anfang des Stacks ein
  *
  * astack - Ein Pointer auf den Stack.
@@ -35,7 +35,7 @@ void stack_push(stack* astack, float value)
 
 }
 
-/* 
+/*
  * Nehme das letzte eingefügte Element vom Anfang des Stacks
  * Gebe NaN zurück, wenn keine Element vorhanden ist.
  *
@@ -78,12 +78,12 @@ float stack_pop(stack* astack)
 
 void process(stack* astack, char* token)
 {
-    float f1,f2,f3;
+    float x,y,result;
 
     if (is_number(token)==1) {
 
-        f1 = atof(token);
-        stack_push(astack, f1);
+        x = atof(token);
+        stack_push(astack, x);
     }
 
     else if(is_add(token)==1) {
@@ -91,11 +91,11 @@ void process(stack* astack, char* token)
         // Idealfall: es gibt zwei ("astack -> top" und "tastack -> top -> next") Werte die man zusammen addieren kann
         if(astack -> top != NULL && astack -> top -> next != NULL){
 
-            f1 = stack_pop(astack);
-            f2 = stack_pop(astack);
-            f3 = f1 + f2;
+            x = stack_pop(astack);
+            y = stack_pop(astack);
+            result = x + y;
 
-            stack_push(astack, f3);
+            stack_push(astack, result);
         }
         else {
             if(astack -> top == NULL) stack_push(astack, NAN);
@@ -108,11 +108,11 @@ void process(stack* astack, char* token)
         // Idealfall: es gibt zwei ("astack -> top" und "tastack -> top -> next") Werte die man zusammen addieren kann
         if(astack -> top != NULL && astack -> top -> next != NULL){
 
-            f1 = stack_pop(astack);
-            f2 = stack_pop(astack);
-            f3 = f2 - f1;
+            x = stack_pop(astack);
+            y = stack_pop(astack);
+            result = y - x;
 
-            stack_push(astack, f3);
+            stack_push(astack, result);
         }
         else {
             if(astack -> top == NULL) stack_push(astack, NAN);
@@ -125,11 +125,11 @@ void process(stack* astack, char* token)
         // Idealfall: es gibt zwei ("astack -> top" und "tastack -> top -> next") Werte die man zusammen addieren kann
         if(astack -> top != NULL && astack -> top -> next != NULL){
 
-            f1 = stack_pop(astack);
-            f2 = stack_pop(astack);
-            f3 = f1 * f2;
+            x = stack_pop(astack);
+            y = stack_pop(astack);
+            result = x * y;
 
-            stack_push(astack, f3);
+            stack_push(astack, result);
         }
         else {
             if(astack -> top == NULL) stack_push(astack, NAN);
@@ -146,7 +146,7 @@ void process(stack* astack, char* token)
 
 }
 
-/* 
+/*
  * Debugausgabe des Stack
  * Diese Funktion kannst du zum debugging des Stack verwenden.
  *
@@ -164,7 +164,7 @@ void print_stack(stack *astack) {
     printf(" |xxxxx|xxxxxxxxxxxxxxxxxxx|xxxxxxxxxxxxxxxxxxx|xxxxxxxxx|\n");
 }
 
-/* 
+/*
  * Erstelle einen Stack mit dynamischem Speicher.
  * Initialisiere die enthaltenen Variablen.
  *
