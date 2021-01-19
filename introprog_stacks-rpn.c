@@ -28,9 +28,12 @@ void stack_push(stack* astack, float value)
 
     stack_element * x = (stack_element*)malloc(sizeof (stack_element));
     x -> value = value;
-    x -> next = astack -> top;
-    astack -> top = x;
-
+    if (astack -> top == NULL){
+        astack -> top = x;
+    } else {
+        x -> next = astack->top;
+        astack->top = x;
+    }
 }
 
 /*
@@ -43,13 +46,19 @@ void stack_push(stack* astack, float value)
  */
 float stack_pop(stack* astack)
 {
-    stack_element* y;
-    float x =astack -> top -> value;
-    y = astack -> top -> next;
+    if (astack -> top == NULL){
+        return NAN;
 
-    free (y);
-    
-    return x;
+    } else {
+        stack_element *y;
+        float x = astack->top->value;
+        y = astack->top->next;
+
+        free(astack->top);
+
+        astack ->top=y;
+        return x;
+    }
 }
 
 /*
