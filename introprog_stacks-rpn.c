@@ -47,7 +47,7 @@ float stack_pop(stack* astack)
   float x;
   	if(astack) {
   		stack_element *y = astack -> top;
-  		retflt = y -> value;
+  		x = y -> value;
   		astack -> top = y -> next; 
       
   		free(y); 
@@ -61,7 +61,7 @@ float stack_pop(stack* astack)
       
   	}
     
-  	return retflt;
+  	return x;
 
 
 
