@@ -43,18 +43,12 @@ void stack_push(stack* astack, float value)
  */
 float stack_pop(stack* astack)
 {
-   /* stack_element* y;
+    stack_element* y;
     float x =astack -> top -> value;
     y = astack -> top -> next;
 
-    free (astack -> top);
-
-    astack -> top = y;
-*/
-   float x = astack -> top ->value;
-   astack -> top = astack -> top -> next;
-   free(astack);
-   
+    free (y);
+    
     return x;
 }
 
