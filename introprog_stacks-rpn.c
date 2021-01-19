@@ -16,77 +16,44 @@ struct _stack_element {
     float value;
 };
 
-/*
- * Füge Element am Anfang des Stacks ein
- *
- * astack - Ein Pointer auf den Stack.
- * value  - Zahl, die als neues Element auf den Stack gelegt
- *          werden soll.
- */
 void stack_push(stack* astack, float value)
 {
 
-    stack_element * x = calloc(1, sizeof (stack_element));
-    x -> value = value;
-    if (astack -> top == NULL){
-        astack -> top = x;
+    stack_element * xnew = (stack_element*) malloc(sizeof(stack_element));
+    newx -> next = NULL;
+    newx -> value = value;
+    newx -> next = astack -> top;
+    astack -> top = newx;
 
-    } else {
-        x -> next = astack->top;
-        astack->top = x;
-    }
 }
 
-/*
- * Nehme das letzte eingefügte Element vom Anfang des Stacks
- * Gebe NaN zurück, wenn keine Element vorhanden ist.
- *
- * astack - Ein Pointer auf den Stack
- *
- * Gebe die im Element enthaltenen Zahl zurück
- */
+
 float stack_pop(stack* astack)
 {
-    stack_element * y;
-    if (astack -> top != NULL){
-        float x = astack -> top -> value;
-        y = astack -> top -> next;
-        free(astack -> top);
-        astack ->top = y;
-        return x;
+    stack_element *holder;
 
-
-
-
-    } else {
+    if (astack -> top == NULL) {
         return NAN;
 
+    } else {
+
+        float xe = astack -> top -> value;
+        holder = astack -> top;
+        astack -> top = holder -> next;
+        free(holder);
+        return xe;
+
     }
+
 }
 
-/*
- * Führt abhängig von dem Token eine entsprechende Operation auf
- * dem Stack aus.  Wenn es sich bei dem Token um
- *  -> eine Zahl handelt, dann konvertiere die Zahl mithilfe von
- *     atof() zu einem float und lege sie auf den Stack.
- *  -> einen Operator handelt, dann nehme zwei Zahlen vom Stack,
- *     führe die Operation aus und lege das Resultat auf den Stack.
- *  -> eine nichterkennbare Zeichenkette handelt, dann tue nichts.
- *
- * astack - Ein Pointer auf den Stack
- * token  - Eine Zeichenkette
- */
 
 void process(stack* astack, char* token) {
-    float x;
-    float y;
-    float result;
 
-
+    float x, y, result;
 
 
     if (is_add(token) == 1) {
-
         x = stack_pop(astack);
         y = stack_pop(astack);
 
@@ -124,12 +91,6 @@ void process(stack* astack, char* token) {
 }
 
 
-/*
- * Debugausgabe des Stack
- * Diese Funktion kannst du zum debugging des Stack verwenden.
- *
- * astack - Ein Pointer auf den Stack
- */
 void print_stack(stack *astack) {
     int counter = 0;
     printf("\n |xxxxx|xxxxxxxxxxxxxxxxxxx|xxxxxxxxxxxxxxxxxxx|xxxxxxxxx|\n");
@@ -142,19 +103,15 @@ void print_stack(stack *astack) {
     printf(" |xxxxx|xxxxxxxxxxxxxxxxxxx|xxxxxxxxxxxxxxxxxxx|xxxxxxxxx|\n");
 }
 
-/*
- * Erstelle einen Stack mit dynamischem Speicher.
- * Initialisiere die enthaltenen Variablen.
- *
- * Gebe einen Pointer auf den Stack zurück.
- */
-stack* stack_erstellen() {
-    stack *x = calloc(1, sizeof(stack));
-    x -> top = NULL;
-    return x;
 
+stack* stack_erstellen() {
+
+    stack *xnum = malloc(sizeof(stack));
+    xnum -> top = NULL;
+    return xnum;
 
 }
+
 
 int main(int argc, char** args)
 {
