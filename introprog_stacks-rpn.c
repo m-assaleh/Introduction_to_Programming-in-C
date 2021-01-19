@@ -16,14 +16,6 @@ struct _stack_element {
     float value;
 };
 
-/*
- * Füge Element am Anfang des Stacks ein
- *
- * astack - Ein Pointer auf den Stack.
- * value  - Zahl, die als neues Element auf den Stack gelegt
- *          werden soll.
- */
-
 void stack_push(stack* astack, float value)
 {
 
@@ -35,14 +27,6 @@ void stack_push(stack* astack, float value)
 
 }
 
-/*
- * Nehme das letzte eingefügte Element vom Anfang des Stacks
- * Gebe NaN zurück, wenn keine Element vorhanden ist.
- *
- * astack - Ein Pointer auf den Stack
- *
- * Gebe die im Element enthaltenen Zahl zurück
- */
 
 float stack_pop(stack* astack)
 {
@@ -63,19 +47,6 @@ float stack_pop(stack* astack)
 
 }
 
-/*
- * Führt abhängig von dem Token eine entsprechende Operation auf
- * dem Stack aus.  Wenn es sich bei dem Token um
- *  -> eine Zahl handelt, dann konvertiere die Zahl mithilfe von
- *     atof() zu einem float und lege sie auf den Stack.
- *  -> einen Operator handelt, dann nehme zwei Zahlen vom Stack,
- *     führe die Operation aus und lege das Resultat auf den Stack.
- *  -> eine nichterkennbare Zeichenkette handelt, dann tue nichts.
- *
- * astack - Ein Pointer auf den Stack
- * token  - Eine Zeichenkette
- */
-
 void process(stack* astack, char* token)
 {
     float x,y,result;
@@ -88,7 +59,6 @@ void process(stack* astack, char* token)
 
     else if(is_add(token)==1) {
 
-        // Idealfall: es gibt zwei ("astack -> top" und "tastack -> top -> next") Werte die man zusammen addieren kann
         if(astack -> top != NULL && astack -> top -> next != NULL){
 
             x = stack_pop(astack);
@@ -105,7 +75,6 @@ void process(stack* astack, char* token)
 
     else if (is_sub(token)==1) {
 
-        // Idealfall: es gibt zwei ("astack -> top" und "tastack -> top -> next") Werte die man zusammen addieren kann
         if(astack -> top != NULL && astack -> top -> next != NULL){
 
             x = stack_pop(astack);
@@ -118,11 +87,8 @@ void process(stack* astack, char* token)
             if(astack -> top == NULL) stack_push(astack, NAN);
             else astack -> top -> value = NAN;
         }
-    }
+    }  else if (is_mult(token)==1){
 
-    else if (is_mult(token)==1){
-
-        // Idealfall: es gibt zwei ("astack -> top" und "tastack -> top -> next") Werte die man zusammen addieren kann
         if(astack -> top != NULL && astack -> top -> next != NULL){
 
             x = stack_pop(astack);
@@ -130,13 +96,10 @@ void process(stack* astack, char* token)
             result = x * y;
 
             stack_push(astack, result);
-        }
-        else {
+        }  else {
             if(astack -> top == NULL) stack_push(astack, NAN);
             else astack -> top -> value = NAN; }
-    }
-
-    else {
+    }  else {
 
         printf("\n<Logik fehlt!>\n");
 
@@ -146,12 +109,6 @@ void process(stack* astack, char* token)
 
 }
 
-/*
- * Debugausgabe des Stack
- * Diese Funktion kannst du zum debugging des Stack verwenden.
- *
- * astack - Ein Pointer auf den Stack
- */
 void print_stack(stack *astack) {
     int counter = 0;
     printf("\n |xxxxx|xxxxxxxxxxxxxxxxxxx|xxxxxxxxxxxxxxxxxxx|xxxxxxxxx|\n");
