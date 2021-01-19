@@ -47,16 +47,20 @@ void stack_push(stack* astack, float value)
  */
 float stack_pop(stack* astack)
 {
-    if (astack -> top == NULL){
-        return NAN;
+    stack_element * y;
+    if (astack -> top != NULL){
+        float x = astack -> top -> value;
+        y = astack -> top -> next;
+        free(astack -> top);
+        astack ->top = y;
+        return x;
+
+
+
 
     } else {
+        return NAN;
 
-        float x;
-        x = astack -> top ->value;
-        astack-> top = astack ->top -> next;
-        free(astack);
-return x;
     }
 }
 
@@ -81,37 +85,37 @@ void process(stack* astack, char* token) {
 
 
 
-        if (is_add(token) == 1) {
+    if (is_add(token) == 1) {
 
-            x = stack_pop(astack);
-            y = stack_pop(astack);
+        x = stack_pop(astack);
+        y = stack_pop(astack);
 
-            result = x + y;
-            stack_push(astack, result);
+        result = x + y;
+        stack_push(astack, result);
 
-        } else if (is_sub(token) == 1) {
+    } else if (is_sub(token) == 1) {
 
-            x = stack_pop(astack);
-            y = stack_pop(astack);
-            result = x - y;
-            stack_push(astack, result);
+        x = stack_pop(astack);
+        y = stack_pop(astack);
+        result = x - y;
+        stack_push(astack, result);
 
-        } else if (is_mult(token) == 1) {
+    } else if (is_mult(token) == 1) {
 
-            x = stack_pop(astack);
-            y = stack_pop(astack);
-            result = x * y;
-            stack_push(astack, result);
+        x = stack_pop(astack);
+        y = stack_pop(astack);
+        result = x * y;
+        stack_push(astack, result);
 
-        } else if (is_number(token) == 1) {
+    } else if (is_number(token) == 1) {
 
-            x = atof(token);
-            stack_push(astack, x);
+        x = atof(token);
+        stack_push(astack, x);
 
-        } else {
+    } else {
 
-            printf("\n<Logik fehlt!>\n");
-            return;
+        printf("\n<Logik fehlt!>\n");
+        return;
 
 
 
@@ -145,7 +149,7 @@ void print_stack(stack *astack) {
  * Gebe einen Pointer auf den Stack zurück.
  */
 stack* stack_erstellen() {
-    stack *x = malloc(sizeof(stack));
+    stack *x = calloc(1, sizeof(stack));
     x -> top = NULL;
     return x;
 
