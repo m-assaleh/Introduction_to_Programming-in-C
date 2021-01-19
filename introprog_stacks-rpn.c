@@ -16,29 +16,24 @@ struct _stack_element {
     float value;
 };
 
-/*
+/* 
  * Füge Element am Anfang des Stacks ein
  *
  * astack - Ein Pointer auf den Stack.
  * value  - Zahl, die als neues Element auf den Stack gelegt
  *          werden soll.
  */
-
 void stack_push(stack* astack, float value)
 {
-    stack_element * num = (stack_element*) malloc(sizeof (stack_element));
-   /* num -> next = NULL;
-    num -> value = value;
-    num -> next = astack -> top;
-    astack -> top = num; */
 
-    num -> value = value;
-    num -> next = astack -> top;
-    astack -> top = num;
-   
+  stack_element * x = (stack_element*)malloc(sizeof (stack_element));
+  x -> value = value;
+  x -> next = astack -> top;
+  astack -> top = x;
+
 }
 
-/*
+/* 
  * Nehme das letzte eingefügte Element vom Anfang des Stacks
  * Gebe NaN zurück, wenn keine Element vorhanden ist.
  *
@@ -46,27 +41,33 @@ void stack_push(stack* astack, float value)
  *
  * Gebe die im Element enthaltenen Zahl zurück
  */
-
-float stack_pop(stack *astack)
+float stack_pop(stack* astack)
 {
-    float num;
-    if(astack) {
 
-        stack_element *temp = astack -> top;
-        num = temp -> value;
-        astack -> top = temp -> next;
-        free(temp);
+  float x;
+  	if(astack) {
+  		stack_element *y = astack -> top;
+  		retflt = y -> value;
+  		astack -> top = y -> next; 
+      
+  		free(y); 
+      
+  	} else {
+  		if(isnan(astack -> top -> value) == 1) {
+        
+  			x = 0; 
+        
+  		}
+      
+  	}
+    
+  	return retflt;
 
-    } else {
 
-        if (isnan(astack -> top -> value)==1) {
-            
-            num = 0;
-        }
 
-    }
 
-    return num;
+
+
 }
 
 /*
@@ -81,49 +82,50 @@ float stack_pop(stack *astack)
  * astack - Ein Pointer auf den Stack
  * token  - Eine Zeichenkette
  */
+ 
+ void process(stack* astack, char* token)
+ {
+     float x,y,result;
 
-void process(stack* astack, char* token)
-{
-    float x,y,result;
-    
-    if (is_add(token)==1){
+     if (is_add(token)==1){
 
-        x = stack_pop(astack);
-        y = stack_pop(astack);
+         x = stack_pop(astack);
+         y = stack_pop(astack);
 
-        result = x + y;
-        stack_push(astack, result);
+         result = x + y;
+         stack_push(astack, result);
 
-    } else if (is_sub(token)==1){
+     } else if (is_sub(token)==1){
 
-        x = stack_pop(astack);
-        y = stack_pop(astack);
-        result = y - x;
-        stack_push(astack, result);
+         x = stack_pop(astack);
+         y = stack_pop(astack);
+         result = y - x;
+         stack_push(astack, result);
 
-    } else if (is_mult(token)==1){
+     } else if (is_mult(token)==1){
 
-        x = stack_pop(astack);
-        y = stack_pop(astack);
-        result = x * y;
-        stack_push(astack, result);
+         x = stack_pop(astack);
+         y = stack_pop(astack);
+         result = x * y;
+         stack_push(astack, result);
 
-    } else if (is_number(token)==1){
+     } else if (is_number(token)==1){
 
-        x = atof(token);
-        stack_push(astack, x);
+         x = atof(token);
+         stack_push(astack, x);
 
-    } else {
+     } else {
 
-    printf("\n<Logik fehlt!>\n");
+     printf("\n<Logik fehlt!>\n");
 
-    }
+     }
 
-    return;
+     return;
 
-}
+ }
 
-/*
+
+/* 
  * Debugausgabe des Stack
  * Diese Funktion kannst du zum debugging des Stack verwenden.
  *
@@ -141,18 +143,17 @@ void print_stack(stack *astack) {
     printf(" |xxxxx|xxxxxxxxxxxxxxxxxxx|xxxxxxxxxxxxxxxxxxx|xxxxxxxxx|\n");
 }
 
-/*
+/* 
  * Erstelle einen Stack mit dynamischem Speicher.
  * Initialisiere die enthaltenen Variablen.
  *
  * Gebe einen Pointer auf den Stack zurück.
  */
 stack* stack_erstellen() {
+  stack * x = (stack*)malloc(sizeof(stack));
+  x -> top = NULL;
+  return x;
 
-    stack *num = (stack*)malloc(sizeof (stack));
-    num -> top = NULL;
-    
-    return num;
 
 }
 
