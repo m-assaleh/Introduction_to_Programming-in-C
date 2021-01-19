@@ -45,9 +45,11 @@ float stack_pop(stack* astack)
 {
 
     float x =astack -> top -> value;
+    y = astack -> top -> next;
 
-    astack -> top = astack -> top -> next;
-    free(astack -> x);
+    free (astack -> top);
+
+    astack -> top = y;
 
     return x;
 }
@@ -132,9 +134,9 @@ void print_stack(stack *astack) {
  * Gebe einen Pointer auf den Stack zurück.
  */
 stack* stack_erstellen() {
-  stack * x = (stack*)malloc(sizeof(stack));
-  x -> top = NULL;
-  return x;
+  stack * x = malloc(sizeof(stack));
+  astack -> top = NULL;
+  return astack;
 
 
 }
@@ -176,3 +178,4 @@ int main(int argc, char** args)
     }
     free(astack);
 }
+
