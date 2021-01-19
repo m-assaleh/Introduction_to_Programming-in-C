@@ -83,7 +83,7 @@ stack_element* y;
 
          x = stack_pop(astack);
          y = stack_pop(astack);
-         result = x - y;
+         result = y - x;
          stack_push(astack, result);
 
      } else if (is_mult(token)==1){
