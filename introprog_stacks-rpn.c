@@ -26,7 +26,7 @@ struct _stack_element {
 void stack_push(stack* astack, float value)
 {
 
-    stack_element * x = (stack_element*)malloc(sizeof (stack_element));
+    stack_element * x = calloc(1, sizeof (stack_element));
     x -> value = value;
     if (astack -> top == NULL){
         astack -> top = x;
@@ -47,7 +47,6 @@ void stack_push(stack* astack, float value)
  */
 float stack_pop(stack* astack)
 {
-    stack_element* y;
     if (astack -> top == NULL){
         return NAN;
 
@@ -55,10 +54,8 @@ float stack_pop(stack* astack)
 
         float x;
         x = astack -> top ->value;
-        y = astack -> top -> next;
-        free(astack -> top);
-
-        astack -> top = y;
+        astack-> top = astack ->top -> next;
+        free(astack);
 return x;
     }
 }
@@ -116,10 +113,11 @@ void process(stack* astack, char* token) {
         } else {
 
             printf("\n<Logik fehlt!>\n");
+            return;
 
         }
 
-        return;
+
     }
 }
 
@@ -149,7 +147,7 @@ void print_stack(stack *astack) {
  * Gebe einen Pointer auf den Stack zurück.
  */
 stack* stack_erstellen() {
-    stack * x = (stack*)malloc(sizeof(stack));
+    stack *x = malloc(sizeof(stack));
     x -> top = NULL;
     return x;
 
