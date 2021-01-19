@@ -43,7 +43,7 @@ void stack_push(stack* astack, float value)
  */
 float stack_pop(stack* astack)
 {
-
+stack_element* y;
     float x =astack -> top -> value;
     y = astack -> top -> next;
 
@@ -135,8 +135,8 @@ void print_stack(stack *astack) {
  */
 stack* stack_erstellen() {
   stack * x = malloc(sizeof(stack));
-  astack -> top = NULL;
-  return astack;
+  x -> top = NULL;
+  return x;
 
 
 }
