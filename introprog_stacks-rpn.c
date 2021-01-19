@@ -20,10 +20,10 @@ void stack_push(stack* astack, float value)
 {
 
     stack_element * xnew = (stack_element*) malloc(sizeof(stack_element));
-    newx -> next = NULL;
-    newx -> value = value;
-    newx -> next = astack -> top;
-    astack -> top = newx;
+    xnew -> next = NULL;
+    xnew -> value = value;
+    xnew -> next = astack -> top;
+    astack -> top = xnew;
 
 }
 
@@ -54,6 +54,7 @@ void process(stack* astack, char* token) {
 
 
     if (is_add(token) == 1) {
+        if ((astack -> top != NULL) && (astack -> top -> next != NULL)){
         x = stack_pop(astack);
         y = stack_pop(astack);
 
