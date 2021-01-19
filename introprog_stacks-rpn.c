@@ -43,31 +43,13 @@ void stack_push(stack* astack, float value)
  */
 float stack_pop(stack* astack)
 {
-
-  float x;
-  	if(astack) {
-  		stack_element *y = astack -> top;
-  		x = y -> value;
-  		astack -> top = y -> next; 
-      
-  		free(y); 
-      
-  	} else {
-  		if(isnan(astack -> top -> value) == 1) {
-        
-  			x = 0; 
-        
-  		}
-      
-  	}
     
-  	return x;
-
-
-
-
-
-
+    float x =astack -> top -> value;
+    
+    astack -> top = astack -> top -> next;
+    free(astack -> top)
+    
+    return x;
 }
 
 /*
