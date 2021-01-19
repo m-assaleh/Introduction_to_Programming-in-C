@@ -27,10 +27,15 @@ struct _stack_element {
 void stack_push(stack* astack, float value)
 {
     stack_element * num = (stack_element*) malloc(sizeof (stack_element));
-    num -> next = NULL;
+   /* num -> next = NULL;
+    num -> value = value;
+    num -> next = astack -> top;
+    astack -> top = num; */
+
     num -> value = value;
     num -> next = astack -> top;
     astack -> top = num;
+   
 }
 
 /*
@@ -55,7 +60,7 @@ float stack_pop(stack *astack)
     } else {
 
         if (isnan(astack -> top -> value)==1) {
-
+            
             num = 0;
         }
 
@@ -80,8 +85,7 @@ float stack_pop(stack *astack)
 void process(stack* astack, char* token)
 {
     float x,y,result;
-
-
+    
     if (is_add(token)==1){
 
         x = stack_pop(astack);
@@ -145,9 +149,10 @@ void print_stack(stack *astack) {
  */
 stack* stack_erstellen() {
 
-    stack *astack = malloc(sizeof(stack));
-    astack -> top = NULL;
-    return astack;
+    stack *num = (stack*)malloc(sizeof (stack));
+    num -> top = NULL;
+    
+    return num;
 
 }
 
