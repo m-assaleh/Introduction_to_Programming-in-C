@@ -87,7 +87,7 @@ bst_node* find_node(bstree* bst, unsigned long phone) {
                 return r;
             }
 
-            else if(phone <= r -> phone){
+            else if(phone < r -> phone){
 
                 r = r -> left;
             }
@@ -129,6 +129,7 @@ void bst_in_order_walk(bstree* bst) {
     }
 }
 
+
 /*
  * Löscht den Teilbaum unterhalb des Knotens node rekursiv durch
  * "post-order" Traversierung, d.h. zurerst wird der linke und dann
@@ -149,15 +150,13 @@ void bst_free_subtree(bst_node* node) {
     }
 }
 
-/*
- * Löscht den gesamten Baum bst und gibt den entsprechenden
- * Speicher frei.
- */
+*
+* Löscht den gesamten Baum bst und gibt den entsprechenden
+        * Speicher frei.
+*/
 void bst_free_tree(bstree* bst) {
     if(bst != NULL && bst->root != NULL) {
         bst_free_subtree(bst->root);
         bst->root = NULL;
     }
 }
-
-
