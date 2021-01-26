@@ -150,10 +150,7 @@ void bst_free_subtree(bst_node* node) {
     }
 }
 
-*
-* Löscht den gesamten Baum bst und gibt den entsprechenden
-        * Speicher frei.
-*/
+
 void bst_free_tree(bstree* bst) {
     if(bst != NULL && bst->root != NULL) {
         bst_free_subtree(bst->root);
