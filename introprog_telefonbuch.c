@@ -109,7 +109,7 @@ bst_node* find_node(bstree* bst, unsigned long phone) {
 
 void bst_in_order_walk_node(bst_node* node) {
 
-    if (node == NULL){
+    if (node){
         bst_in_order_walk_node(node -> left);
 
         print_node(node);
@@ -137,7 +137,7 @@ void bst_in_order_walk(bstree* bst) {
  */
 void bst_free_subtree(bst_node* node) {
 
-    if (node == NULL){
+    if (node){
 
         bst_free_subtree(node -> left);
 
@@ -159,6 +159,5 @@ void bst_free_tree(bstree* bst) {
         bst->root = NULL;
     }
 }
-
 
 
