@@ -133,6 +133,11 @@ void bst_in_order_walk(bstree* bst) {
 
 void bst_free_subtree(bst_node* node) {
 
+    if (node == NULL){
+        return;
+        
+    }
+    
     if (node){
 
         bst_free_subtree(node -> left);
