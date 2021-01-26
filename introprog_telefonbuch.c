@@ -12,14 +12,15 @@
  */
 void bst_insert_node(bstree* bst, unsigned long phone, char *name) {
 
-    bst_node *ne = calloc(1, sizeof(bst_node));
-
-   ne -> name = calloc((strlen(name) + 1) , sizeof(char));
+    bst_node *ne = (bst_node*)calloc(1, sizeof(bst_node));
+ne -> phone = phone;
+   ne -> name = (char *)calloc((strlen(name) + 1) , sizeof(char));
     strncpy(ne->name, name, strlen(name));
 
 
-    // ne -> left = NULL;
-    //  ne -> right = NULL;
+    ne -> left = NULL;
+    ne -> right = NULL;
+    ne -> parent = NULL;
     ne -> phone = phone;
     ne -> name =name;
 
