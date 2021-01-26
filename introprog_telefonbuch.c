@@ -11,11 +11,13 @@ void bst_insert_node(bstree* bst, unsigned long phone, char *name) {
 
 
     bst_node *ne = malloc(sizeof(bst_node));
-   ne -> name = malloc(sizeof(char)*(strlen(name)+1));
+
+    ne -> phone = phone;
+
+    ne -> name = malloc(sizeof(char)*(strlen(name)+1));
 
     strncpy(ne-> name, name, (strlen(name)+1));
 
-    ne -> phone = phone;
     ne -> name = name;
     ne -> left = NULL;
     ne -> right = NULL;
