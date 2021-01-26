@@ -12,8 +12,18 @@
 
 void bst_insert_node(bstree *bst, unsigned long phone, char *name)
 {
-    
-    
+
+
+    bst_node *check = find_node(bst, phone);
+
+    if(check){
+
+        printf(" error \n");
+
+        return;
+    }
+
+
     char *an = malloc((strlen(name) + 1) * sizeof(char));
 
     snprintf(an, (strlen(name) + 1), "%s", name);
@@ -42,12 +52,12 @@ void bst_insert_node(bstree *bst, unsigned long phone, char *name)
             if(first -> phone < phone){
 
                 second = first;
-                
+
                 first = first -> left;
 
             } else {
                 second = first;
-                
+
                 first = first -> right;
 
             }
@@ -66,16 +76,7 @@ void bst_insert_node(bstree *bst, unsigned long phone, char *name)
         }
     }
     
-    
-    bst_node *check = find_node(bst, phone);
-    
-    if(check){
-
-        printf(" error \n");
-
-        return;
-    }
-    
+   
 }
 
 
