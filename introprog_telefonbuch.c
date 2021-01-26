@@ -14,54 +14,63 @@
 void bst_insert_node(bstree *bst, unsigned long phone, char *name)
 {
     bst_node *check = find_node(bst, phone);
-    if(check)
-    {
-        printf("Fehler: Telefonnummer entspricht nicht den Vorgaben oder Telefonnummer bereits vorhanden\n");
+    if(check){
+        
+        printf(" error \n");
+        
         return;
     }
 
-    int len = strlen(name) + 1;
-    char *newname = (char*)malloc(len * sizeof(char));
-    snprintf(newname, len, "%s", name);
-    bst_node *new_elem = (bst_node*)malloc(sizeof(bst_node));
+    
+    
+    char *an = malloc((strlen(name) + 1) * sizeof(char));
 
-    new_elem -> phone = phone;
-    new_elem -> name = newname;
-    new_elem -> left = NULL;
-    new_elem -> right = NULL;
+    
+    bst_node *bn = malloc(sizeof(bst_node));
 
-    if(bst -> root == NULL)
-    {
-        new_elem -> parent = NULL;
-        bst -> root = new_elem;
-    }
-    else {
+    bn -> left = NULL;
+    bn -> right = NULL;
+    bn -> phone = phone;
+    bn -> name = an;
+   
+
+    if(bst -> root == NULL){
+        
+        bn -> parent = NULL;
+        bst -> root = bn;
+        
+    }else {
+        
         bst_node *next = bst -> root;
         bst_node *prev = NULL;
-        while(next)
-        {
-            if(next -> phone < phone)
-            {
+        
+        while(next){
+            
+            if(next -> phone < phone){
+                
                 prev = next;
                 next = next -> right;
-            }
-            else {
+                
+            } else {
                 prev = next;
                 next = next -> left;
+                
             }
         }
-        if(prev -> phone < phone)
-        {
-            new_elem -> parent = prev;
-            prev -> right = new_elem;
-        }
-        else {
-            new_elem -> parent = prev;
-            prev -> left = new_elem;
+        
+        if(prev -> phone < phone){
+            
+            bn -> parent = prev;
+            prev -> right = bn;
+            
+        } else {
+            
+            bn -> parent = prev;
+            prev -> left = bn;
+            
         }
     }
 }
-
 
 
 /*
@@ -69,6 +78,8 @@ void bst_insert_node(bstree *bst, unsigned long phone, char *name)
  * dem Wert phone zurück, falls dieser existiert.  Ansonsten wird
  * NULL zurückgegeben.
  */
+
+
 bst_node* find_node(bstree* bst, unsigned long phone) {
 
 
@@ -106,6 +117,8 @@ bst_node* find_node(bstree* bst, unsigned long phone) {
 
 
 /* Gibt den Unterbaum von node in "in-order" Reihenfolge aus */
+
+
 void bst_in_order_walk_node(bst_node* node) {
 
     if (node){
@@ -123,6 +136,8 @@ void bst_in_order_walk_node(bst_node* node) {
  * Gibt den gesamten Baum bst in "in-order" Reihenfolge aus.  Die
  * Ausgabe dieser Funktion muss aufsteigend soriert sein.
  */
+
+
 void bst_in_order_walk(bstree* bst) {
     if (bst != NULL) {
         bst_in_order_walk_node(bst->root);
@@ -135,17 +150,18 @@ void bst_in_order_walk(bstree* bst) {
  * der rechte Teilbaum gelöscht.  Anschließend wird der übergebene
  * Knoten gelöscht.
  */
+
+
 void bst_free_subtree(bst_node* node) {
 
     if (node){
 
-        bst_free_subtree(node -> left);
+        bst_node * thenode = node;
 
-        bst_free_subtree(node -> right);
-
-        free(node -> name);
-
-        free(node);
+        bst_free_subtree(thenode -> left);
+        bst_free_subtree(thenode -> right);
+        free(thenode -> name);
+        free(thenode);
 
     }
 }
@@ -155,6 +171,8 @@ void bst_free_subtree(bst_node* node) {
  * Löscht den gesamten Baum bst und gibt den entsprechenden
  * Speicher frei.
  */
+
+
 void bst_free_tree(bstree* bst) {
     if(bst != NULL && bst->root != NULL) {
         bst_free_subtree(bst->root);
