@@ -66,8 +66,9 @@ void bst_insert_node(bstree* bst, unsigned long phone, char *name) {
 
 
     bst_node *check = find_node(bst, phone);
-    if(check)
-    {
+    
+    if(check){
+        
         printf("error \n");
         return;
     }
@@ -135,9 +136,9 @@ void bst_free_subtree(bst_node* node) {
 
     if (node == NULL){
         return;
-        
+
     }
-    
+
     if (node){
 
         bst_free_subtree(node -> left);
