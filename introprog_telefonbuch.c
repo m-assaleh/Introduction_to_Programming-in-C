@@ -15,12 +15,11 @@ ne -> phone = phone;
 
     ne -> left = NULL;
     ne -> right = NULL;
-    ne -> parent = NULL;
     ne -> phone = phone;
     ne -> name =name;
 
 
-    if(bst -> root == NULL){
+    if(bst == NULL){
 
         ne -> parent = NULL;
         bst -> root = ne;
