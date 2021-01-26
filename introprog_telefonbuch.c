@@ -16,7 +16,7 @@ void bst_insert_node(bstree* bst, unsigned long phone, char *name) {
 
     ne -> name = malloc(sizeof(char)*(strlen(name)+1));
 
-    strncpy(ne-> name, name, (strlen(name));
+    strncpy(ne-> name, name, strlen(name));
 
     ne -> name = name;
     ne -> left = NULL;
@@ -65,10 +65,21 @@ void bst_insert_node(bstree* bst, unsigned long phone, char *name) {
 
 
 
+    bst_node *check = find_node(bst, phone);
+
+    if(check){
+
+        printf("error \n");
+        return;
+    }
+
+}
+
+
 
 bst_node* find_node(bstree* bst, unsigned long phone) {
 
-   
+
 
         bst_node *r = bst -> root;
         while(r){
@@ -118,6 +129,7 @@ void bst_in_order_walk(bstree* bst) {
 
 
 void bst_free_subtree(bst_node* node) {
+
 
 
     if (node){
