@@ -21,9 +21,11 @@ void bst_insert_node(bstree *bst, unsigned long phone, char *name)
         return;
     }
 
-    
+
     
     char *an = malloc((strlen(name) + 1) * sizeof(char));
+
+    snprintf(newname, len, "%s", name);
 
     
     bst_node *bn = malloc(sizeof(bst_node));
@@ -32,42 +34,42 @@ void bst_insert_node(bstree *bst, unsigned long phone, char *name)
     bn -> right = NULL;
     bn -> phone = phone;
     bn -> name = an;
-   
+
 
     if(bst -> root == NULL){
-        
+
         bn -> parent = NULL;
         bst -> root = bn;
-        
+
     }else {
-        
+
         bst_node *next = bst -> root;
         bst_node *prev = NULL;
-        
+
         while(next){
-            
+
             if(next -> phone < phone){
-                
+
                 prev = next;
                 next = next -> right;
-                
+
             } else {
                 prev = next;
                 next = next -> left;
-                
+
             }
         }
-        
+
         if(prev -> phone < phone){
-            
+
             bn -> parent = prev;
             prev -> right = bn;
-            
+
         } else {
-            
+
             bn -> parent = prev;
             prev -> left = bn;
-            
+
         }
     }
 }
