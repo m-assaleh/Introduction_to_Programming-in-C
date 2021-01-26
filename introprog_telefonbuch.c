@@ -8,7 +8,6 @@
 void bst_insert_node(bstree* bst, unsigned long phone, char *name) {
 
     bst_node *ne = (bst_node*)malloc(sizeof(bst_node));
-ne -> phone = phone;
    ne -> name = (char *)malloc((strlen(name) + 1) *sizeof(char));
     strncpy(ne->name, name, strlen(name));
 
@@ -16,10 +15,10 @@ ne -> phone = phone;
     ne -> left = NULL;
     ne -> right = NULL;
     ne -> phone = phone;
-    ne -> name =name;
+    ne -> name = name;
 
 
-    if(bst == NULL){
+    if(bst -> root == NULL){
 
         ne -> parent = NULL;
         bst -> root = ne;
