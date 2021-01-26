@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "introprog_telefonbuch.h"
 
 /*
@@ -13,14 +12,16 @@
 
 void bst_insert_node(bstree *bst, unsigned long phone, char *name)
 {
+
+
     bst_node *check = find_node(bst, phone);
+
     if(check){
 
         printf(" error \n");
 
         return;
     }
-
 
 
     char *an = malloc((strlen(name) + 1) * sizeof(char));
@@ -43,35 +44,39 @@ void bst_insert_node(bstree *bst, unsigned long phone, char *name)
 
     }else {
 
-        bst_node *next = bst -> root;
-        bst_node *prev = NULL;
+        bst_node *first = bst -> root;
+        bst_node *second = NULL;
 
-        while(next){
+        while(first){
 
-            if(next -> phone < phone){
+            if(first -> phone < phone){
 
-                prev = next;
-                next = next -> right;
+                second = first;
+
+                first = first -> right;
 
             } else {
-                prev = next;
-                next = next -> left;
+                second = first;
+
+                first = first -> left;
 
             }
         }
 
-        if(prev -> phone < phone){
+        if(second -> phone < phone){
 
-            bn -> parent = prev;
-            prev -> right = bn;
+            bn -> parent = second;
+            second -> right = bn;
 
         } else {
 
-            bn -> parent = prev;
-            prev -> left = bn;
+            bn -> parent = second;
+            second -> left = bn;
 
         }
     }
+    
+
 }
 
 
@@ -116,8 +121,6 @@ bst_node* find_node(bstree* bst, unsigned long phone) {
 
 
 
-
-
 /* Gibt den Unterbaum von node in "in-order" Reihenfolge aus */
 
 
@@ -144,6 +147,7 @@ void bst_in_order_walk(bstree* bst) {
     if (bst != NULL) {
         bst_in_order_walk_node(bst->root);
     }
+    
 }
 
 /*
@@ -163,9 +167,11 @@ void bst_free_subtree(bst_node* node) {
         bst_free_subtree(thenode -> left);
         bst_free_subtree(thenode -> right);
         free(thenode -> name);
+        
         free(thenode);
 
     }
+    
 }
 
 
@@ -180,4 +186,6 @@ void bst_free_tree(bstree* bst) {
         bst_free_subtree(bst->root);
         bst->root = NULL;
     }
+    
 }
+
