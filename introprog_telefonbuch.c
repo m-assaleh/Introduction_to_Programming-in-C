@@ -9,7 +9,7 @@ void bst_insert_node(bstree* bst, unsigned long phone, char *name) {
 
     bst_node *ne = (bst_node*)malloc(sizeof(bst_node));
    ne -> name = (char *)malloc((strlen(name) + 1) *sizeof(char));
-    strncpy(ne->name, name, strlen(name));
+    strncpy(ne->name, name, (strlen(name)+1));
 
 
     ne -> left = NULL;
