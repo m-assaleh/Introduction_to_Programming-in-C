@@ -7,9 +7,9 @@
 
 void bst_insert_node(bstree* bst, unsigned long phone, char *name) {
 
-    
-    
-    
+
+
+
     bst_node *ne = malloc(sizeof(bst_node));
    ne -> name = malloc(sizeof(char)*(strlen(name)+1));
 
@@ -25,6 +25,8 @@ void bst_insert_node(bstree* bst, unsigned long phone, char *name) {
     if(bst -> root == NULL){
 
         bst -> root = ne;
+        printf("error \n");
+
 
     } else {
 
@@ -67,7 +69,7 @@ void bst_insert_node(bstree* bst, unsigned long phone, char *name) {
         printf("error \n");
         return;
     }
-    
+
 }
 
 
