@@ -14,7 +14,63 @@
  */
 void merge(int* array, int first, int middle, int last)
 {
-  // HIER Funktion merge() implementieren
+
+    int b[last - first +1];
+    int k = first;
+    int m = middle + 1;
+    int i = 1;
+
+
+    while( (k <= middle) && (m <= last) ) {
+
+        if(array[k] <= array[m]) {
+
+            b[i] = array[k];
+
+            k++;
+
+        } else {
+
+            b[i] = array[m];
+
+            m++;
+
+        }
+        i++;
+    }
+
+    while(k <= middle) {
+
+        b[i] = array[k];
+
+        k++;
+
+        i++;
+
+    }
+
+    while(m <= last) {
+
+        b[i] = array[m];
+
+        m++;
+
+        i++;
+
+    }
+
+    int j = 1;
+
+    while( j < i) {
+
+        array[first + j - 1] = b[j];
+
+        j++;
+
+    }
+
+    free(b);
+
 }
 
 /*
@@ -28,7 +84,18 @@ void merge(int* array, int first, int middle, int last)
  */
 void merge_sort(int* array, int first, int last)
 {
-  // HIER Funktion merge_sort() implementieren
+
+    if (first < last) {
+
+        float middle = ((first + last) / 2);
+
+        merge_sort(array, first, middle);
+
+        merge_sort(array, (middle + 1), last);
+
+        merge(array, first, middle, last);
+
+    }
 }
 
 /*
@@ -48,15 +115,17 @@ int main (int argc, char *argv[])
     }
     
     char *filename = argv[2];
-    
-    // Hier array initialisieren
-    
+
+    int maximale_anzahl = atoi(argv[1]);
+
+    int *array = (int*)malloc(maximale_anzahl * sizeof(int));
+
     int len = read_array_from_file(array, atoi(argv[1]), filename);
 
     printf("Eingabe:\n");
     print_array(array, len);
 
-    // HIER Aufruf von "merge_sort()"
+    merge_sort(array, 0 , (len - 1 ));
 
     printf("Sortiert:\n");
     print_array(array, len);
