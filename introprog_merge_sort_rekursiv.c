@@ -119,13 +119,13 @@ int main (int argc, char *argv[])
 
     char *filename = argv[2];
 
-   // int maximale_anzahl = atoi(argv[1]);
+    int maximale_anzahl = atoi(argv[1]);
 
-   // int *array = (int*)malloc(maximale_anzahl * sizeof(int));
+    int *array = (int*)malloc(maximale_anzahl * sizeof(int));
 
  //  int array[atoi(argv[1])];
 
-    int *array = malloc(sizeof(int)*atoi(argv[1]));
+  //  int *array = malloc(sizeof(int)*atoi(argv[1]));
 
 
     int len = read_array_from_file(array, atoi(argv[1]), filename);
