@@ -15,7 +15,9 @@
 void merge(int* array, int first, int middle, int last)
 {
 
-    int b[last - first +1];
+    int *b = (int*)malloc((last - first + 1) *sizeof (int ));
+
+    // int b[last - first + 1];
     int k = first;
     int m = middle + 1;
     int i = 1;
@@ -68,7 +70,8 @@ void merge(int* array, int first, int middle, int last)
         j++;
 
     }
-
+    
+    free(b);
 
 }
 
@@ -112,7 +115,7 @@ int main (int argc, char *argv[])
         printf ("usage: %s <maximale anzahl>  <dateipfad>\n", argv[0]);
         exit(2);
     }
-    
+
     char *filename = argv[2];
 
     int maximale_anzahl = atoi(argv[1]);
