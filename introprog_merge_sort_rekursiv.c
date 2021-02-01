@@ -15,10 +15,10 @@
 void merge(int* array, int first, int middle, int last)
 {
 
-   int *b = (int*)malloc((last - first + 1) *sizeof (int ));
+  // int *b = (int*)malloc((last - first + 1) *sizeof (int ));
 
 
-   // int b[last - first + 1];
+    int b[last - first + 1];
     int k = first;
     int m = middle + 1;
     int i = 1;
@@ -72,7 +72,7 @@ void merge(int* array, int first, int middle, int last)
 
     }
 
-  free(b);
+ // free(b);
 
 }
 
