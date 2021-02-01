@@ -69,7 +69,6 @@ void merge(int* array, int first, int middle, int last)
 
     }
 
-    free(b);
 
 }
 
