@@ -15,9 +15,9 @@
 void merge(int* array, int first, int middle, int last)
 {
 
-  //  int *b = (int*)malloc((last - first + 1) *sizeof (int ));
+   // int *b = (int*)malloc((last - first + 1) *sizeof (int ));
 
-    
+
     int b[last - first + 1];
     int k = first;
     int m = middle + 1;
@@ -72,7 +72,7 @@ void merge(int* array, int first, int middle, int last)
 
     }
 
- //   free(b);
+  //  free(b);
 
 }
 
@@ -90,7 +90,7 @@ void merge_sort(int* array, int first, int last)
 
     if (first < last) {
 
-        float middle = ((first + last) / 2);
+        int middle = ((first + last) / 2);
 
         merge_sort(array, first, middle);
 
