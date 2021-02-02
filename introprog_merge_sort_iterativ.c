@@ -86,11 +86,11 @@ void merge_sort(int* array, int first, int last)
     int step = 1;
     int right = 0;
     int middle = 0;
-    int left= first;
+    int left;
 
     while (step <= last){
         left = 1;
-        while (left <= left - step){
+        while (left <= last - step){
             middle = left + step - 1;
             middle = ((middle < last) ? middle : last);
             right = left + 2*step - 1;
