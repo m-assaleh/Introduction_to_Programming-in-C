@@ -15,7 +15,7 @@
 void merge(int* array, int first, int middle, int last)
 {
 
-    int b[last - first + 1];
+    int bx[last - first + 1];
     int k = first;
     int m = middle + 1;
     int i = 1;
@@ -24,13 +24,13 @@ void merge(int* array, int first, int middle, int last)
 
         if(array[k] <= array[m]) {
 
-            b[i] = array[k];
+            bx[i] = array[k];
 
             k++;
 
         } else {
 
-            b[i] = array[m];
+            bx[i] = array[m];
 
             m++;
 
@@ -41,7 +41,7 @@ void merge(int* array, int first, int middle, int last)
 
     while(k <= middle) {
 
-        b[i] = array[k];
+        bx[i] = array[k];
 
         k++;
 
@@ -51,7 +51,7 @@ void merge(int* array, int first, int middle, int last)
 
     while(m <= last) {
 
-        b[i] = array[m];
+        bx[i] = array[m];
 
         m++;
 
@@ -63,7 +63,7 @@ void merge(int* array, int first, int middle, int last)
 
     while( j < i) {
 
-        array[first + j - 1] = b[j];
+        array[first + j - 1] = bx[j];
 
         j++;
 
@@ -84,7 +84,9 @@ void merge_sort(int* array, int first, int last)
 {
 
     int step = 1;
-    int right , middle , left;
+    int right = 0;
+    int middle = 0;
+    int left = 0;
 
 
     do {
@@ -137,7 +139,7 @@ int main (int argc, char *argv[])
 
     char *filename = argv[2];
 
-    int *array = (int*)malloc(atoi(argv[1]) * sizeof(int));
+    int *array = (int*)malloc(atoi(argv[1])*sizeof(int));
 
     int len = read_array_from_file(array, atoi(argv[1]), filename);
 
