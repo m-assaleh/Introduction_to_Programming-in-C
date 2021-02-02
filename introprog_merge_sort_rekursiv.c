@@ -8,18 +8,18 @@
  * sortierten Array zusammen
  *
  * array : Pointer auf das Array
- * first : Index des ersten Elemements (Beginn) des (Teil-)Array
+ * first : Index des ersten Elements (Beginn) des (Teil-)Array
  * middle: Index des mittleren Elements des (Teil-)Array
- * last  : Index des Letzten Elements (Ende) des (Teil-)Array
+ * last  : Index des letzten Elements(Ende) des (Teil-)Array
  */
 void merge(int* array, int first, int middle, int last)
 {
-
+    
     int b[last - first + 1];
     int k = first;
     int m = middle + 1;
     int i = 1;
-
+    
     while( (k <= middle) && (m <= last) ) {
 
         if(array[k] <= array[m]) {
@@ -35,7 +35,7 @@ void merge(int* array, int first, int middle, int last)
             m++;
 
         }
-
+        
         i++;
     }
 
@@ -68,55 +68,33 @@ void merge(int* array, int first, int middle, int last)
         j++;
 
     }
-
+    
 }
 
 /*
- * Diese Funktion implementiert den iterativen Mergesort
+ * Diese Funktion implementiert den rekursiven Mergesort
  * Algorithmus auf einem Array. Sie soll analog zum Pseudocode in
- * Listing 4 implementiert werden.
+ * Listing 1 implementiert werden.
  *
- * array:  Pointer auf das Array
- * first:  Index des ersten Elements
- * last :  Index des letzten Elements
+ * array: Pointer auf das Array
+ * first: Index des ersten Elements des (Teil-)Array
+ * last:  Index des letzten Elements des (Teil-)Array
  */
 void merge_sort(int* array, int first, int last)
 {
 
-    int step = 1;
-    int right , middle , left;
+    if (first < last) {
 
+        int middle = ((first + last) / 2);
 
-    do {
+        merge_sort(array, first, middle);
 
-        left = 1;
+        merge_sort(array, (middle + 1), last);
 
-        do {
-
-            middle = left + step - 1;
-
-            middle = (((middle) < (last))?(middle):(last));
-
-            right = left + 2 * step - 1;
-
-            right = (((right) < (last))?(right):(last));
-
-            merge(array , left , middle , right);
-
-            left = left + 2 * step;
-
-        }
-
-        while (left <= (last - step) );
-
-        step = 2 * step;
-
+        merge(array, first, middle, last);
 
     }
-
-    while (step <= last);
-
-
+    
 }
 
 /*
@@ -126,7 +104,7 @@ void merge_sort(int* array, int first, int last)
  * selben Format über die Standardausgabe wieder aus.
  *
  * Aufruf: ./introprog_merge_sort_rekursiv <maximale anzahl> \
- * 	   <dateipfad>
+ *         <dateipfad>
  */
 int main (int argc, char *argv[])
 {
