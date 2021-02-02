@@ -83,10 +83,8 @@ void merge(int* array, int first, int middle, int last)
 void merge_sort(int* array, int first, int last)
 {
 
+    int right, middle, left;
     int step = 1;
-    int right = 0;
-    int middle = 0;
-    int left = 0;
 
     do {
 
