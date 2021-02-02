@@ -85,13 +85,12 @@ void merge_sort(int* array, int first, int last)
 
     int step = 1;
     int right , middle , left;
-    
-    
+
+
     do {
-        
+
         left = 1;
 
-        
         do {
 
             middle = left + step - 1;
@@ -102,7 +101,7 @@ void merge_sort(int* array, int first, int last)
 
             right = (((right) < (last))?(right):(last));
 
-            merge(first , left , middle , right);
+            merge(array , left , middle , right);
 
             left = left + 2 * step;
 
@@ -112,12 +111,12 @@ void merge_sort(int* array, int first, int last)
 
         step = 2 * step;
 
-        
+
     }
-    
+
     while (step <= last);
 
-    
+
 }
 
 /*
