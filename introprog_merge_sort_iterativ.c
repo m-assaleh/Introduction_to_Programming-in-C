@@ -15,7 +15,7 @@
 void merge(int* array, int first, int middle, int last)
 {
 
-    int bx[last - first + 1];
+    int b[last - first + 1];
     int k = first;
     int m = middle + 1;
     int i = 1;
@@ -24,13 +24,13 @@ void merge(int* array, int first, int middle, int last)
 
         if(array[k] <= array[m]) {
 
-            bx[i] = array[k];
+            b[i] = array[k];
 
             k++;
 
         } else {
 
-            bx[i] = array[m];
+            b[i] = array[m];
 
             m++;
 
@@ -41,7 +41,7 @@ void merge(int* array, int first, int middle, int last)
 
     while(k <= middle) {
 
-        bx[i] = array[k];
+        b[i] = array[k];
 
         k++;
 
@@ -51,7 +51,7 @@ void merge(int* array, int first, int middle, int last)
 
     while(m <= last) {
 
-        bx[i] = array[m];
+        b[i] = array[m];
 
         m++;
 
@@ -63,7 +63,7 @@ void merge(int* array, int first, int middle, int last)
 
     while( j < i) {
 
-        array[first + j - 1] = bx[j];
+        array[first + j - 1] = b[j];
 
         j++;
 
@@ -82,12 +82,12 @@ void merge(int* array, int first, int middle, int last)
  */
 void merge_sort(int* array, int first, int last)
 {
-    
+
     int step = 1;
     int right = 0;
     int middle = 0;
     int left = 0;
-    
+
     do {
 
         left = 0;
@@ -102,7 +102,7 @@ void merge_sort(int* array, int first, int last)
 
             right = (((right) < (last))?(right):(last));
 
-            merge(array , left , middle , right);
+            merge(array, left, middle, right);
 
             left = left + 2*step;
 
@@ -116,8 +116,7 @@ void merge_sort(int* array, int first, int last)
     }
 
     while (step <= last);
-
-
+    
 }
 
 /*
