@@ -94,7 +94,7 @@ void merge_sort(int* array, int first, int last)
             middle = left + step - 1;
             middle = ((middle < last) ? middle : last);
             right = left + 2*step - 1;
-            right = ((right < last )? right : last);
+            right = ((right < last ) ? right : last);
             merge(array , left , middle , right);
             left = left + 2*step;
         }
