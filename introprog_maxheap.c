@@ -14,50 +14,51 @@ heap* heap_create(size_t capacity) {
 }
 
 void heapify(heap* h, size_t i) {
-int l = i*2;
-int r =i * 2 + 1;
-int largest;
+    int l = 2*i;
+    int r =i * 2 + 1;
+    int largest;
 
     if (l <= h -> size && h -> elements[r] > h -> elements[i]){
         largest = l;
     } else {
 
         largest = i;
-        
+
     }
     if (r <= h -> size && h -> elements[r] > h -> elements[largest]){
 
         largest=r;
 
     }
-    if (largest =!i ){
+    if (largest != i ){
         int m;
-      m =   h -> elements[i];
-              h -> elements[i] = h -> elements[largest];
-      h -> elements[largest] = m;
+        m =   h -> elements[i];
+        h -> elements[i] = h -> elements[largest];
+        h -> elements[largest] = m;
 
 
     }
     heapify(h, largest);
-    
+
 }
 
 int heap_extract_max(heap* h) {
 
     int max;
-    if(h -> size =! 0)
+    if(h -> size < 1)
     {
+        return -1;
+
+        
+    }
+    else {
         max = h -> elements[0];
         h -> elements[0] = h -> elements[h -> size];
-        h -> size = h -> size - 1;
+        h -> size = (h -> size) - 1;
         heapify(h, 0);
         return max;
     }
-    else {
-        return -1;
 
-    }
-    
 }
 
 int heap_insert(heap* h, int key) {
@@ -70,7 +71,7 @@ int heap_insert(heap* h, int key) {
         i = i/2;
     }
     h -> elements[i] = key;
-    
+
     return 0;
 }
 
