@@ -7,40 +7,36 @@
 
 heap* heap_create(size_t capacity) {
 
-    heap * heap_create = (heap*)malloc(sizeof(heap));
-    heap_create -> elements = (int*)malloc(capacity * sizeof(int));
-    heap_create -> size = 0;
-    heap_create -> capacity = capacity;
-    return heap_create;
+    heap * hp = (heap*)malloc(sizeof(heap));
+    hp -> elements = (int*)malloc(capacity * sizeof(int));
+    hp -> capacity = capacity;
+    hp -> size = 0;
+    return hp;
 }
 
 void heapify(heap* h, size_t i) {
-    int l = 2*i;
-    int r =i * 2 + 1;
-    int largest;
+    size_t l = (i+1)*2 - 1;
+    size_t r = (i+1) * 2;
 
-    if (l <= h -> size && h -> elements[r] > h -> elements[i]){
+    size_t largest;
+
+    if (l < h -> size && h -> elements[l] > h -> elements[i]){
         largest = l;
     } else {
-
         largest = i;
-
     }
-    if (r <= h -> size && h -> elements[r] > h -> elements[largest]){
+    if (r < h -> size && h -> elements[r] > h -> elements[largest]){
 
         largest=r;
 
     }
     if (largest != i ){
-        int m;
-        m =   h -> elements[i];
+        int m =   h -> elements[i];
         h -> elements[i] = h -> elements[largest];
         h -> elements[largest] = m;
-
         heapify(h, largest);
 
     }
-
 }
 
 int heap_extract_max(heap* h) {
@@ -49,29 +45,31 @@ int heap_extract_max(heap* h) {
     if(h -> size < 1)
     {
         return -1;
-        
     }
 
-        max = h -> elements[1];
-        h -> elements[1] = h -> elements[h -> size];
+        max = h -> elements[0];
+        h -> elements[0] = h -> elements[h -> size-1];
         h -> size = h -> size - 1;
-        heapify(h, 1);
+        heapify(h, 0);
         return max;
-
-
 }
 
 int heap_insert(heap* h, int key) {
-    h -> size = h -> size +1;
-    int i = h -> size;
 
-    while(i > 1 && h -> elements[i / 2] < key)
+
+    if(h -> size == h -> capacity)
     {
-        h -> elements[i] = h -> elements[i/2];
-        i = i/2;
+        return -1;
+    }
+    size_t i = h -> size;
+    h -> size = (h -> size) +1;
+
+    while(i > 1 && h -> elements[(i+1)/2 -1] < key)
+    {
+        h -> elements[i] = h -> elements[(i+1)/2 -1];
+        i = (i+1)/2 -1;
     }
     h -> elements[i] = key;
-
     return 0;
 }
 
