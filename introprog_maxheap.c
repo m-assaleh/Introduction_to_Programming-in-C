@@ -31,7 +31,7 @@ void heapify(heap* h, size_t i) {
 
     }
     if (largest != i ){
-        int m =   h -> elements[i];
+        size_t m =   h -> elements[i];
         h -> elements[i] = h -> elements[largest];
         h -> elements[largest] = m;
         heapify(h, largest);
@@ -56,18 +56,18 @@ int heap_extract_max(heap* h) {
 
 int heap_insert(heap* h, int key) {
 
+    size_t i = h -> size;
 
     if(h -> size == h -> capacity)
     {
         return -1;
     }
-    size_t i = h -> size;
     h -> size = (h -> size) +1;
 
-    while(i > 1 && h -> elements[(i+1)/2 -1] < key)
+    while(i != 0 && h -> elements[(i+1)/2 -1] < key)
     {
         h -> elements[i] = h -> elements[(i+1)/2 -1];
-        i = (i+1)/2 -1;
+        i = (i+1)/2 - 1;
     }
     h -> elements[i] = key;
     return 0;
