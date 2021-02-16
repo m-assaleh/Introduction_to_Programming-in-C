@@ -6,6 +6,7 @@
 #include "introprog_heap.h"
 
 heap* heap_create(size_t capacity) {
+
     heap * heap_create = (heap*)malloc(sizeof(heap));
     heap_create -> elements = (int*)malloc(capacity * sizeof(int));
     heap_create -> size = 0;
@@ -36,9 +37,9 @@ void heapify(heap* h, size_t i) {
         h -> elements[i] = h -> elements[largest];
         h -> elements[largest] = m;
 
+        heapify(h, largest);
 
     }
-    heapify(h, largest);
 
 }
 
@@ -48,16 +49,15 @@ int heap_extract_max(heap* h) {
     if(h -> size < 1)
     {
         return -1;
-
         
     }
-    else {
-        max = h -> elements[0];
-        h -> elements[0] = h -> elements[h -> size];
-        h -> size = (h -> size) - 1;
-        heapify(h, 0);
+
+        max = h -> elements[1];
+        h -> elements[1] = h -> elements[h -> size];
+        h -> size = h -> size - 1;
+        heapify(h, 1);
         return max;
-    }
+
 
 }
 
