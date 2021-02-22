@@ -18,8 +18,7 @@ void init_list(list* mylist){
 void insert_list(list_element* le, list* mylist){
 
     le -> next = NULL;
-
-
+    
     if (mylist -> first == NULL){
 
         mylist -> first = le;
@@ -34,9 +33,9 @@ void insert_list(list_element* le, list* mylist){
 
 }
 
-void free_list(list* mylist){
+void free_list(list* mylist) {
 
-    list_element* saver = mylist -> first;
+    list_element * saver = mylist -> first;
 
     while (saver != NULL){
 
@@ -51,23 +50,23 @@ void free_list(list* mylist){
 
 }
 
-void read_data(char* filename, list* mylist) {
+void read_data(char* filename, list* mylist){
 
-    FILE* file_in = fopen(filename, "r");
+    FILE * file_in = fopen(filename, "r");
 
     char in [255], out [255];
 
     int num = 0;
 
-    list_element* sav;
+    list_element * sav;
 
-    while (fgets(in, 255, file_in)!= NULL){
+    while (fgets(in, 255, file_in) != NULL){
 
         sscanf(in, "%s %d", out, &num);
 
-        char *password = malloc(sizeof(char) * (strlen(out)+1));
+        char * password = malloc(sizeof(char) * (strlen(out) + 1) );
 
-        sav = malloc(sizeof(list_element));
+        sav = malloc(sizeof(list_element) );
 
         strcpy(password, out);
 
@@ -83,7 +82,7 @@ void read_data(char* filename, list* mylist) {
 
 }
 
-list_element* partition(list* input, list* left, list* right) {
+list_element* partition(list* input, list* left, list* right){
 
     list_element* pivot = input -> first;
 
@@ -99,14 +98,17 @@ list_element* partition(list* input, list* left, list* right) {
         else {
             insert_list(p, right);
         }
+        
         p = x;
     }
+    
     return pivot;
+    
 }
 
 void qsort_list(list* mylist){
 
-    if (mylist->first == mylist->last){
+    if (mylist -> first == mylist -> last){
 
         return;
 
@@ -115,11 +117,13 @@ void qsort_list(list* mylist){
         list right, left;
 
         init_list(&left);
+        
         init_list(&right);
 
         list_element* pivot = partition(mylist, &left, &right);
 
         qsort_list(&left);
+        
         qsort_list(&right);
 
         if (left.first == NULL){
@@ -128,23 +132,23 @@ void qsort_list(list* mylist){
 
         } else {
 
-            mylist->first = left.first;
+            mylist -> first = left.first;
 
-            left.last->next = pivot;
+            left.last -> next = pivot;
 
         }
 
         if (right.first == NULL){
 
-            pivot->next = NULL;
+            pivot -> next = NULL;
 
-            mylist->last = pivot;
+            mylist -> last = pivot;
 
         } else {
 
-            pivot->next = right.first;
+            pivot -> next = right.first;
 
-            mylist->last = right.last;
+            mylist -> last = right.last;
 
         }
 
@@ -155,7 +159,7 @@ void qsort_list(list* mylist){
 
 void print_list(list* mylist){
 
-    list_element* sav= mylist->first;
+    list_element * sav = mylist -> first;
 
     while (sav != NULL){
 
