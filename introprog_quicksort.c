@@ -9,25 +9,26 @@
 
 void init_list(list* mylist){
 
-mylist -> first = NULL;
+    mylist -> first = NULL;
 
-mylist -> last = NULL;
+    mylist -> last = NULL;
 
 }
 
 void insert_list(list_element* le, list* mylist){
 
+    le -> next = NULL;
+
+
     if (mylist -> first == NULL){
 
         mylist -> first = le;
         mylist -> last = le;
-        mylist -> last -> next = NULL;
 
     } else {
 
         mylist -> last -> next = le;
         mylist -> last = le;
-        mylist -> last -> next = NULL;
 
     }
 
@@ -35,231 +36,134 @@ void insert_list(list_element* le, list* mylist){
 
 void free_list(list* mylist){
 
-    list_element * fisrt = mylist -> first;
+    list_element* saver = mylist -> first;
 
-    list_element * last = NULL;
+    while (saver != NULL){
 
+        list_element * saverx = saver -> saverx;
 
-    while(fisrt){
+        free(saver -> password);
+        free(saver);
 
-        last = fisrt;
-        fisrt = fisrt -> next;
-
-        free(last -> password);
-        free(last);
-
+        saverx = saverx;
+        
     }
 
 }
 
-int words(char *string){
+void read_data(char* filename, list* mylist) {
 
-    int counter = 0, len = strlen(string);
-    char lastC;
+    FILE* file_in = fopen(filename, "r");
 
-    if (len > 0){
+    char in [255], out [255];
 
-        lastC = string[0];
+    int num = 0;
+
+    list_element* sav;
+
+    while (fgets(in, 255, file_in)!= NULL){
+
+        sscanf(in, "%s %d", out, &num);
+        
+        char *password = malloc(sizeof(char) * (strlen(out)+1));
+        
+        sav = malloc(sizeof(list_element));
+        
+        strcpy(password, out);
+        
+        sav -> password = password;
+        
+        sav -> count = num;
+        
+        insert_list(sav, mylist);
 
     }
 
-    for (int i = 0; i <= len; i++) {
-        if ((string[i] == ' ' || string[i] == '\0') && lastC != ' '){
-
-            counter++;
-        }
-
-        lastC = string[i];
-
-    }
-
-    return counter;
+    fclose(file_in);
 
 }
 
-void read_data(char* filename, list* mylist){
+list_element* partition(list* input, list* left, list* right) {
 
-    FILE *fp = fopen(filename, "r");
+    list_element* pivot = input -> first;
+    
+    list_element* p = input -> first -> next;
 
-    if (fp == NULL){
+    while (p != NULL){
 
-        perror("Error");
+        list_element* x = p -> next;
 
-        return;
-    }
-
-
-    char buffer[100], pw[100], *strbuffer, pwcountbuffer[100], pwcount, pwwords;
-
-    memset(pw, 0, sizeof(pw));
-
-    while (fgets ( buffer, sizeof (buffer), fp ) != NULL){
-
-        pwwords = words(buffer) - 1;
-
-        strbuffer = strtok(buffer, " ");
-
-
-        for (int i = 0; i < pwwords; i++){
-
-            strcat(pw, strbuffer);
-
-            if (pwwords > 1 && i != pwwords - 1){
-
-                strcat(pw, " ");
-
-            }
-
-            strbuffer = strtok(NULL, " ");
+        if(p -> count < pivot -> count) {
+            insert_list(p, left);
         }
-
-        strcpy(pwcountbuffer, strbuffer);
-
-        pwcount = atoi(pwcountbuffer);
-
-        list_element* newle = (list_element *) malloc (sizeof (list_element) );
-
-        if (newle == NULL){
-
-            perror("Overflow!");
-
-            return;
-
+        else {
+            insert_list(p, right);
         }
-
-        newle -> password = (char *) malloc( sizeof(pw)* sizeof(char) );
-
-        strcpy(newle -> password, pw);
-
-        newle -> count = pwcount;
-
-        insert_list(newle, mylist);
-
-        memset(pw, 0, sizeof(pw) );
-
+        p = x;
     }
-
-    fclose(fp);
-
-}
-
-list_element* partition( list* input, list* left, list* right ){
-
-    list_element *pivot;
-
-    if (input -> first == NULL){
-
-        pivot = NULL;
-        input -> last = NULL;
-
-    } else {
-
-        pivot = input -> first;
-        input -> first = pivot -> next;
-        pivot -> next = NULL;
-
-    }
-
-    if (pivot != NULL){
-
-        list_element *temp = input -> first;
-
-        while (temp != NULL){
-
-            input -> first = temp -> next;
-
-            if (input -> first == NULL){
-
-                input -> last = NULL;
-
-            }
-
-            if (temp -> count >= pivot -> count){
-
-                insert_list(temp, right);
-
-            } else {
-
-                insert_list(temp, left);
-
-            }
-
-            temp = input -> first;
-
-        }
-
-    }
-
     return pivot;
-
 }
 
 void qsort_list(list* mylist){
 
-    if (mylist -> first == mylist -> last){
-
+    if (mylist->first == mylist->last){
+        
         return;
-
+    
     } else {
+        
+        list right, left;
+        
+        init_list(&left);
+        init_list(&right);
 
-        list lstack;
-        list rstack;
-        list *left = &lstack;
-        list *right = &rstack;
-        init_list(left);
-        init_list(right);
-        list_element *pivot = partition(mylist, left, right);
-        qsort_list(left);
-        qsort_list(right);
+        list_element* pivot = partition(mylist, &left, &right);
 
+        qsort_list(&left);
+        qsort_list(&right);
 
-        if (left -> first == NULL){
+        if (left.first == NULL){
 
             mylist -> first = pivot;
-
+            
         } else {
-
-            mylist -> first = left -> first;
-
-            left -> last -> next = pivot;
+            
+            mylist->first = left.first;
+            
+            left.last->next = pivot;
+            
         }
 
-        if (right -> first == NULL){
+        if (right.first == NULL){
 
-            pivot -> next = NULL;
-
-            mylist -> last = pivot;
-
+            pivot->next = NULL;
+            
+            mylist->last = pivot;
+            
         } else {
-
-            pivot -> next = right -> first;
-
-            mylist -> last = right -> last;
+            
+            pivot->next = right.first;
+            
+            mylist->last = right.last;
 
         }
 
+        return;
     }
 
 }
 
 void print_list(list* mylist){
+    
+    list_element* sav= mylist->first;
 
-    if (mylist -> first == NULL){
-
-        printf("List is empty!\n\n");
-
-        return;
-
-    }
-
-    list_element *temp = mylist -> first;
-
-    while (temp){
-
-        printf("%s %d\n", temp -> password, temp -> count);
-
-        temp = temp -> next;
-
+    while (sav != NULL){
+        
+        printf("%s %d\n", sav -> password, sav -> count);
+        sav = sav -> next;
+        
     }
 
 }
+
+
