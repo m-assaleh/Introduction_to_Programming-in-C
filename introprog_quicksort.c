@@ -5,6 +5,7 @@
 #include <assert.h>
 #include "quicksort.h"
 
+
 /*****************************************************
  * Die benoetigten structs findet Ihr in quicksort.h *
  *****************************************************/
