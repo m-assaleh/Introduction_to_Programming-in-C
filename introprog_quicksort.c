@@ -40,13 +40,13 @@ void free_list(list* mylist){
 
     while (saver != NULL){
 
-        list_element * saverx = saver -> saverx;
+        list_element * saverx = saver -> next;
 
         free(saver -> password);
         free(saver);
 
-        saverx = saverx;
-        
+        saver = saverx;
+
     }
 
 }
@@ -64,17 +64,17 @@ void read_data(char* filename, list* mylist) {
     while (fgets(in, 255, file_in)!= NULL){
 
         sscanf(in, "%s %d", out, &num);
-        
+
         char *password = malloc(sizeof(char) * (strlen(out)+1));
-        
+
         sav = malloc(sizeof(list_element));
-        
+
         strcpy(password, out);
-        
+
         sav -> password = password;
-        
+
         sav -> count = num;
-        
+
         insert_list(sav, mylist);
 
     }
@@ -86,7 +86,7 @@ void read_data(char* filename, list* mylist) {
 list_element* partition(list* input, list* left, list* right) {
 
     list_element* pivot = input -> first;
-    
+
     list_element* p = input -> first -> next;
 
     while (p != NULL){
@@ -107,13 +107,13 @@ list_element* partition(list* input, list* left, list* right) {
 void qsort_list(list* mylist){
 
     if (mylist->first == mylist->last){
-        
+
         return;
-    
+
     } else {
-        
+
         list right, left;
-        
+
         init_list(&left);
         init_list(&right);
 
@@ -125,25 +125,25 @@ void qsort_list(list* mylist){
         if (left.first == NULL){
 
             mylist -> first = pivot;
-            
+
         } else {
-            
+
             mylist->first = left.first;
-            
+
             left.last->next = pivot;
-            
+
         }
 
         if (right.first == NULL){
 
             pivot->next = NULL;
-            
+
             mylist->last = pivot;
-            
+
         } else {
-            
+
             pivot->next = right.first;
-            
+
             mylist->last = right.last;
 
         }
@@ -154,14 +154,14 @@ void qsort_list(list* mylist){
 }
 
 void print_list(list* mylist){
-    
+
     list_element* sav= mylist->first;
 
     while (sav != NULL){
-        
+
         printf("%s %d\n", sav -> password, sav -> count);
         sav = sav -> next;
-        
+
     }
 
 }
