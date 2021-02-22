@@ -19,16 +19,15 @@ void insert_list(list_element* le, list* mylist){
 
     if (mylist -> first == NULL){
 
-        mylist -> last -> next = NULL;
-
-
         mylist -> first = le;
         mylist -> last = le;
+        mylist -> last -> next = NULL;
 
     } else {
 
         mylist -> last -> next = le;
         mylist -> last = le;
+        mylist -> last -> next = NULL;
 
     }
 
