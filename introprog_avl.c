@@ -1,79 +1,55 @@
-#include <stdlib.h>
+#include <stdlib.h>		
 #include <stdio.h>	// Ein- / Ausgabe
 #include <math.h>	// Für die Berechnungen der Ausgabe
 #include "avl.h"
 
 
-/* Gibt den gesamten AVL Baum in "in-order" Reihenfolge aus. */
-
-
-AVLNode * finder(AVLTree* avlt, int value) {
-
-    AVLNode * helper = avlt -> root;
-
-    while (helper != NULL) {
-
-        if (value == helper -> value) {
-
-            return helper;
-
-        }
-
-        else if (value < helper -> value) {
-
-            helper = helper -> left;
-
-        } else {
-
-            helper = helper -> right;
-
-        }
-
-    }
-
-    return NULL;
+AVLNode* getnode(AVLTree* avlt, int value)
+{
+AVLNode *temp = avlt -> root;
+while(temp != NULL)
+{
+if(value == temp -> value)
+{
+return temp;
+}
+else if(value < temp -> value)
+{
+temp = temp -> left;
+}
+else {
+temp = temp -> right;
+}
+}
+return NULL;
 }
 
-int height(AVLNode *node) {
-
-    if (node == NULL) {
-
-        return -1;
-
-    } else {
-
-        return node -> height;
-    }
+int hohe(AVLNode *node) {
+if(node == NULL) {
+return -1;
+}
+else {
+return node -> height;
+}
 }
 
+void AVL_in_order_walk(AVLTree* avlt)
+{	
+	if(avlt->root==NULL) return;
+	AVLNode *temp1=avlt->root;
+	avlt->root=avlt->root->left;
+	
+	AVL_in_order_walk(avlt);
+	avlt->root=temp1;
 
-void AVL_in_order_walk_node(AVLNode* node) {
+	printf(" %d",avlt->root->value);
 
-    if(node -> left != NULL) {
+	avlt->root=avlt->root->right;
 
-        AVL_in_order_walk_node(node -> left);
+	AVL_in_order_walk(avlt);
 
-    }
-
-    printf("%d ", node -> value);
-
-    if(node -> right != NULL) {
-
-        AVL_in_order_walk_node(node -> right);
-
-    }
-
-}
-
-
-void AVL_in_order_walk(AVLTree* avlt) {
-
-    if (avlt != NULL && avlt -> root != NULL) {
-
-        AVL_in_order_walk_node(avlt -> root);
-
-    }
-
+	avlt->root=temp1;
+	if(avlt->root->parent ==NULL) printf("\n");    
 }
 
 void AVL_rotate_left(AVLTree* avlt, AVLNode* x)
@@ -119,7 +95,7 @@ void AVL_rotate_left(AVLTree* avlt, AVLNode* x)
 		if(sol==rww) x->height=1+sol;
 		return;
 	}
-
+	
 	if(y->left==NULL && y->right==NULL){
 		y->height=0;
 	       	return;
@@ -165,7 +141,7 @@ y->parent->left = x;
 x->right = y;
 y->parent = x;
 
-
+	
 	if(y->left==NULL && y->right==NULL){
 		y->height=0;
 	       	return;
@@ -310,7 +286,6 @@ avlt -> numberOfNodes = avlt -> numberOfNodes + 1;
 }
 }
 
-//balance after node inserted
 AVLNode *temp = newnode;
 while(temp != NULL) {
 AVL_balance(avlt, temp);
@@ -334,34 +309,22 @@ temp = temp -> parent;
 }
 }
 
-
-void AVL_remove_all_nodes(AVLNode * node) {
-
-    if (node -> left != NULL) {
-
-        AVL_remove_all_nodes(node -> left);
-
-    }
-
-    if(node -> right != NULL) {
-
-        AVL_remove_all_nodes(node -> right);
-
-    }
-
-    free(node);
-
+void AVL_remove_all_nodes(AVLNode *node) {
+if(node -> left != NULL) {
+AVL_remove_all_nodes(node -> left);
+}
+if(node -> right != NULL) {
+AVL_remove_all_nodes(node -> right);
+}
+free(node);
 }
 
-void AVL_remove_all_elements(AVLTree* avlt) {
-
-    if(avlt != NULL) {
-
-        AVL_remove_all_nodes(avlt -> root);
-
-    } else {
-
-        free(avlt);
-
-    }
+void AVL_remove_all_elements(AVLTree* avlt)
+{
+if(avlt != NULL) {
+AVL_remove_all_nodes(avlt -> root);
+}
+else {
+free(avlt);
+}
 }
