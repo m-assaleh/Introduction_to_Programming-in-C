@@ -7,25 +7,25 @@
 
 AVLNode* getnode(AVLTree* avlt, int value)
 {
-    AVLNode *temp = avlt -> root;
-    while(temp != NULL)
+    AVLNode *helper = avlt -> root;
+    while(helper != NULL)
     {
-        if(value == temp -> value)
+        if(value == helper -> value)
         {
-            return temp;
+            return helper;
         }
-        else if(value < temp -> value)
+        else if(value < helper -> value)
         {
-            temp = temp -> left;
+            helper = helper -> left;
         }
         else {
-            temp = temp -> right;
+            helper = helper -> right;
         }
     }
     return NULL;
 }
 
-int hohe(AVLNode *node) {
+int h (AVLNode *node) {
     if(node == NULL) {
         return -1;
     }
@@ -37,11 +37,11 @@ int hohe(AVLNode *node) {
 void AVL_in_order_walk(AVLTree* avlt)
 {
     if(avlt->root==NULL) return;
-    AVLNode *temp1=avlt->root;
+    AVLNode *helper=avlt->root;
     avlt->root=avlt->root->left;
 
     AVL_in_order_walk(avlt);
-    avlt->root=temp1;
+    avlt->root=helper;
 
     printf(" %d",avlt->root->value);
 
@@ -49,7 +49,7 @@ void AVL_in_order_walk(AVLTree* avlt)
 
     AVL_in_order_walk(avlt);
 
-    avlt->root=temp1;
+    avlt->root=helper;
     if(avlt->root->parent ==NULL) printf("\n");
 }
 
