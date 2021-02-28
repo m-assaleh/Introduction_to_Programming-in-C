@@ -25,7 +25,7 @@ AVLNode* getnode(AVLTree* avlt, int value)
     return NULL;
 }
 
-int h (AVLNode *node) {
+int hohe (AVLNode *node) {
     if(node == NULL) {
         return -1;
     }
