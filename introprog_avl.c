@@ -25,7 +25,7 @@ AVLNode* getnode(AVLTree* avlt, int value)
     return NULL;
 }
 
-int hohe(AVLNode *node) {
+int h (AVLNode *node) {
     if(node == NULL) {
         return -1;
     }
@@ -54,13 +54,6 @@ void AVL_in_order_walk(AVLTree* avlt)
 }
 
 
-
-
-
-
-
-
-
 /* Diese Funktion führt eine Linksrotation auf dem angegebenen
  * Knoten aus.
  *
@@ -68,6 +61,7 @@ void AVL_in_order_walk(AVLTree* avlt)
  * angepasst werden.  Falls dies nicht eingehalten wird
  * funktionieren die Unit-Tests ggf. nicht.
  */
+
 void AVL_rotate_left(AVLTree* avlt, AVLNode* x)
 {
     AVLNode *y=x->right;
@@ -183,12 +177,12 @@ void AVL_rotate_right(AVLTree* avlt, AVLNode* y)
     }
 
     if(y->left!=NULL && y->right!=NULL){
-        int sol=y->left->height;
-        int rww=y->right->height;
-        if(sol<rww)y->height=1+rww;
-        if(sol>rww) y->height=1+sol;
-        if(sol==0 && rww==0)y->height=1;
-        if(sol==rww) y->height=1+sol;
+        int sxol=y->left->height;
+        int rxww=y->right->height;
+        if(sxol<rxww)y->height=1+rxww;
+        if(sxol>rxww) y->height=1+sxol;
+        if(sxol==0 && rxww==0)y->height=1;
+        if(sxol==rxww) y->height=1+sxol;
         return;
     }
 
