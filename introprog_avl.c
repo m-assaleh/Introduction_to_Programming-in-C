@@ -34,15 +34,15 @@ AVLNode * finder(AVLTree* avlt, int value) {
     return NULL;
 }
 
-int h (AVLNode * node) {
-
+int height(AVLNode *node) {
+    
     if (node == NULL) {
-
+        
         return -1;
-
+        
     } else {
-
-        return node -> h;
+        
+        return node -> height;
     }
 }
 
@@ -132,7 +132,7 @@ void AVL_rotate_left(AVLTree* avlt, AVLNode* x) {
 
     } else {
 
-        hrightside = -1;
+        rightside = -1;
     }
 
     if (leftside > rightside) {
@@ -162,7 +162,7 @@ void AVL_rotate_left(AVLTree* avlt, AVLNode* x) {
 
     }
 
-    if (leftside > hrightside) {
+    if (leftside > rightside) {
 
         y -> height = leftside + 1;
 
