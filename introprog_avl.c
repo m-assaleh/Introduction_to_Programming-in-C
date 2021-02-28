@@ -35,13 +35,13 @@ AVLNode * finder(AVLTree* avlt, int value) {
 }
 
 int height(AVLNode *node) {
-    
+
     if (node == NULL) {
-        
+
         return -1;
-        
+
     } else {
-        
+
         return node -> height;
     }
 }
