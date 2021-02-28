@@ -76,365 +76,263 @@ void AVL_in_order_walk(AVLTree* avlt) {
 
 }
 
+void AVL_rotate_left(AVLTree* avlt, AVLNode* x)
+{
+	AVLNode *y=x->right;
+	x->right=y->left;
 
-/* Diese Funktion führt eine Linksrotation auf dem angegebenen
- * Knoten aus.
- *
- * Beachtet: Die Höhen der entsprechenden Teilbäume müssen (lokal)
- * angepasst werden.  Falls dies nicht eingehalten wird
- * funktionieren die Unit-Tests ggf. nicht.
- */
+	if(y->left!=NULL){
+		y->left->parent=x;
+	}
 
+	y->parent=x->parent;
 
-void AVL_rotate_left(AVLTree* avlt, AVLNode* x) {
+	if(x->parent==NULL) avlt->root=y;
+	else{
+		if(x==x->parent->left) x->parent->left=y;
+		else x->parent->right=y;
+	}
+	y->left=x;
+	x->parent=y;
 
-    AVLNode * y = x -> right;
+	if(x->left==NULL && x->right==NULL){
+		x->height=0;
+	       	return;
+	}
 
-    x -> right = y -> left;
+	if(x->left==NULL && x->right!=NULL){
+		x->height=1+(x->right->height);
+		return;
+	}
 
-    if (y -> left != NULL) {
+	if(x->left!=NULL && x->right==NULL){
+		x->height=1+(x->left->height);
+		return;
+	}
 
-        y -> left -> parent = x;
-    }
+	if(x->left!=NULL && x->right!=NULL){
+		int sol=x->left->height;
+		int rww=x->right->height;
+		if(sol<rww)x->height=1+rww;
+		if(sol>rww) x->height=1+sol;
+		if(sol==0 && rww==0)x->height=1;
+		if(sol==rww) x->height=1+sol;
+		return;
+	}
 
-    y -> parent = x -> parent;
+	if(y->left==NULL && y->right==NULL){
+		y->height=0;
+	       	return;
+	}
 
-    if ( x -> parent == NULL) {
+	if(y->left==NULL && y->right!=NULL){
+		y->height=1+(y->right->height);
+		return;
+	}
 
-        avlt -> root = y;
+	if(y->left!=NULL && y->right==NULL){
+		y->height=1+(y->left->height);
+		return;
+	}
 
-    } else if (x == x -> parent -> left) {
-
-        x -> parent -> left = y;
-
-    } else {
-
-        x -> parent -> right = y;
-    }
-
-    y -> left = x;
-    x -> parent = y;
-
-    int leftside, rightside;
-
-    if (x -> left != NULL) {
-
-        leftside = x -> left -> height;
-
-    } else {
-
-        leftside = -1;
-    }
-
-    if (x -> right != NULL) {
-
-        rightside = x->right->height;
-
-    } else {
-
-        rightside = -1;
-    }
-
-    if (leftside > rightside) {
-        x -> height = leftside + 1;
-
-    } else {
-
-        x -> height = rightside + 1;
-    }
-
-    if (y -> left != NULL) {
-
-        leftside = y -> left -> height;
-
-    } else {
-
-        leftside = -1;
-    }
-
-    if (y -> right != NULL) {
-
-        rightside = y -> right -> height;
-
-    } else {
-
-        rightside = -1;
-
-    }
-
-    if (leftside > rightside) {
-
-        y -> height = leftside + 1;
-
-    } else {
-
-        y -> height = rightside + 1;
-    }
-
+	if(y->left!=NULL && y->right!=NULL){
+		int sol=y->left->height;
+		int rww=y->right->height;
+		if(sol<rww)y->height=1+rww;
+		if(sol>rww) y->height=1+sol;
+		if(sol==0 && rww==0)y->height=1;
+		if(sol==rww) y->height=1+sol;
+		return;
 }
-
-
-/* Diese Funktion führt eine Rechtsrotation auf dem angegebenen
- * Knoten aus.
- *
- * Beachtet: Die Höhen der entsprechenden Teilbäume müssen (lokal)
- * angepasst werden.  Falls dies nicht eingehalten wird
- * funktionieren die Unit-Tests ggf. nicht.
- */
-
+}
 
 void AVL_rotate_right(AVLTree* avlt, AVLNode* y)
 {
 
-    AVLNode * x = y -> left;
+AVLNode* x = y->left;
+y->left = x->right;
+if (x->right != NULL) {
+x->right->parent = y;
+}
+x->parent = y->parent;
+if (y->parent == NULL) {
+avlt->root = x;
+} else if (y == y->parent->right) {
+y->parent->right = x;
+} else {
+y->parent->left = x;
+}
+x->right = y;
+y->parent = x;
 
-    y -> left = x -> right;
 
-    if (x -> right != NULL) {
+	if(y->left==NULL && y->right==NULL){
+		y->height=0;
+	       	return;
+	}
 
-        x -> right -> parent = y;
+	if(y->left==NULL && y->right!=NULL){
+		y->height=1+(y->right->height);
+		return;
+	}
 
-    }
+	if(y->left!=NULL && y->right==NULL){
+		y->height=1+(y->left->height);
+		return;
+	}
 
-    x -> parent = y -> parent;
+	if(y->left!=NULL && y->right!=NULL){
+		int sol=y->left->height;
+		int rww=y->right->height;
+		if(sol<rww)y->height=1+rww;
+		if(sol>rww) y->height=1+sol;
+		if(sol==0 && rww==0)y->height=1;
+		if(sol==rww) y->height=1+sol;
+		return;
+	}
 
-    if (y -> parent == NULL) {
 
-        avlt -> root = x;
 
-    } else if (y == y -> parent -> right) {
+	if(x->left==NULL && x->right==NULL){
+		x->height=0;
+	       	return;
+	}
 
-        y -> parent -> right = x;
+	if(x->left==NULL && x->right!=NULL){
+		x->height=1+(x->right->height);
+		return;
+	}
 
-    } else {
+	if(x->left!=NULL && x->right==NULL){
+		x->height=1+(x->left->height);
+		return;
+	}
 
-        y -> parent -> left = x;
-    }
+	if(x->left!=NULL && x->right!=NULL){
+		int sol=x->left->height;
+		int rww=x->right->height;
+		if(sol<rww)x->height=1+rww;
+		if(sol>rww) x->height=1+sol;
+		if(sol==0 && rww==0)x->height=1;
+		if(sol==rww) x->height=1+sol;
+		return;
+	}
+}
 
-    x -> right = y;
-    y -> parent = x;
+void AVL_balance(AVLTree* avlt, AVLNode* node)
+{
+	AVLNode *rt=node->right;
+	AVLNode *lt=node->left;
 
-    int leftside, rightside;
+	int black, white, bubu, red, green, blue;
+	black=white=-1;
+	bubu=red=green=blue=-2;
 
-    if(y -> left != NULL) {
+	if(rt==NULL) black=-1;
+	else{
+		black=rt->height;
+		if(rt->right!=NULL) green=rt->right->height;
+		if(rt->left!=NULL) blue=rt->left->height;
+	}
 
-        leftside = y -> left -> height;
+	if(lt==NULL) white=-1;
+	else{
+		white=lt->height;
+		if(lt->right!=NULL) red=lt->right->height;
+		if(lt->left!=NULL) bubu=lt->left->height;
+	}
+	
 
-    } else {
+	if(white > 1+black)
+	{
+	  if(bubu < red)
+	  {
+	    AVL_rotate_left(avlt,lt);
+	  }
+	  AVL_rotate_right(avlt,node);
+	}
 
-        leftside = -1;
-    }
-
-    if(y -> right != NULL) {
-
-        rightside = y -> right -> height;
-
-    } else {
-
-        rightside = -1;
-    }
-
-    if(leftside > rightside) {
-
-        y -> height = leftside + 1;
-
-    } else {
-
-        y -> height = rightside + 1;
-    }
-
-    if(x -> left != NULL) {
-
-        leftside = x -> left->height;
-
-    } else {
-
-        leftside = -1;
-    }
-
-    if(x -> right != NULL) {
-
-        rightside = x -> right -> height;
-
-    } else {
-
-        rightside = -1;
-    }
-
-    if (leftside>rightside) {
-
-        x -> height = leftside + 1;
-    } else {
-
-        x -> height = rightside + 1;
-
-    }
+	else
+	{
+	 if(black > 1+white)
+	 {
+	   if(green < blue)
+	   {
+	     AVL_rotate_right(avlt,rt);
+	   }
+	   AVL_rotate_left(avlt,node);
+	 }
+	}
+	
 }
 
 
-/* Balanciere den Teilbaum unterhalb von node.
- *
- * Beachtet: Die Höhen der entsprechenden Teilbäume müssen _nicht_
- * angepasst werden, da dieses schon in den Rotationen geschieht.
- * Falls dies nicht eingehalten wird funktionieren die Unit-Tests
- * ggf. nicht.
- */
-
-
-void AVL_balance(AVLTree* avlt, AVLNode* node) {
-
-    if (node == NULL) {
-
-        return;
-    }
-
-
-    int L = height(node -> left), R = height(node -> right);
-
-    if (L > R + 1) {
-
-        int LL, LR;
-
-        if (node->left != NULL){
-
-            LL = height(node -> left -> left);
-            LR = height(node -> left -> right);
-
-        } else {
-            LL = -1;
-            LR = -1;
-        }
-        if (LL < LR) {
-
-            AVL_rotate_left(avlt, node -> left);
-
-        }
-
-        AVL_rotate_right(avlt, node);
-
-    } else if (R > L + 1) {
-
-        int RR, RL;
-
-        if (node->right != 0) {
-
-            RR = height(node -> right -> right);// nicht gelich null
-            RL = height(node -> right -> left);
-
-        } else {
-
-            RR = -1;
-            RL = -1;
-
-        }
-
-        if (RR < RL) {
-
-            AVL_rotate_right(avlt, node -> right);
-
-        }
-
-        AVL_rotate_left(avlt, node);
-
-    }
+void AVL_insert_value(AVLTree* avlt, int value)
+{
+AVLNode *check = getnode(avlt, value);
+if(check != NULL) {
+printf("Der Wert ist bereits vorhanden!\n");
+return;
 }
 
+AVLNode *newnode = (AVLNode*)malloc(sizeof(AVLNode));
+newnode -> left = NULL;
+newnode -> right = NULL;
+newnode -> parent = NULL;
+newnode -> value = value;
+newnode -> height = 0;
 
-/* Fügt der Wert value in den Baum ein.
- *
- * Die Implementierung muss sicherstellen, dass der Baum nach dem
- * Einfügen immer noch balanciert ist!
- */
-
-
-void AVL_insert_value(AVLTree* avlt, int value) {
-
-    AVLNode * check = finder(avlt, value);
-
-    AVLNode * newnode = (AVLNode*)malloc(sizeof(AVLNode));
-
-    newnode -> left = NULL;
-    newnode -> right = NULL;
-    newnode -> parent = NULL;
-    newnode -> value = value;
-    newnode -> height = 0;
-
-    if (avlt -> root == NULL) {
-
-        avlt -> root = newnode;
-        avlt -> numberOfNodes = avlt -> numberOfNodes + 1;
-
-    } else {
-
-        AVLNode * current = avlt -> root;
-        AVLNode * prev;
-
-        while (current != NULL) {
-
-            prev = current;
-            if(current -> value < value) {
-
-                current = current -> right;
-
-            } else {
-
-                current = current -> left;
-
-            }
-        }
-
-        if (prev -> value < value) {
-            prev -> right = newnode;
-            newnode -> parent = prev;
-            avlt -> numberOfNodes = avlt -> numberOfNodes + 1;
-
-        } else {
-            prev -> left = newnode;
-            newnode -> parent = prev;
-            avlt -> numberOfNodes = avlt -> numberOfNodes + 1;
-
-        }
-    }
-
-
-    AVLNode * temp = newnode;
-
-    while(temp != NULL) {
-
-        AVL_balance(avlt, temp);
-
-        if (temp -> parent != NULL) {
-
-            if(temp -> parent -> left == NULL && temp -> parent -> right == NULL) {
-                temp -> parent -> height = 0;
-
-            } else {
-                int L, R;
-
-                L = height(temp -> parent -> left);
-                R = height(temp -> parent -> right);
-
-                if(L > R) {
-
-                    temp -> parent -> height = L + 1;
-
-                } else {
-
-                    temp -> parent -> height = R + 1;
-
-                }
-            }
-        }
-
-        temp = temp -> parent;
-
-    }
+if(avlt -> root == NULL) {
+avlt -> root = newnode;
+avlt -> numberOfNodes = avlt -> numberOfNodes + 1;
+}
+else {
+AVLNode *current = avlt -> root;
+AVLNode *prev;
+while(current != NULL) {
+prev = current;
+if(current -> value < value) {
+current = current -> right;
+}
+else {
+current = current -> left;
+}
+}
+if(prev -> value < value) {
+prev -> right = newnode;
+newnode -> parent = prev;
+avlt -> numberOfNodes = avlt -> numberOfNodes + 1;
+}
+else {
+prev -> left = newnode;
+newnode -> parent = prev;
+avlt -> numberOfNodes = avlt -> numberOfNodes + 1;
+}
 }
 
-
-/* Löscht den gesamten AVL-Baum und gibt den Speicher aller Knoten
- * frei.
- */
+//balance after node inserted
+AVLNode *temp = newnode;
+while(temp != NULL) {
+AVL_balance(avlt, temp);
+if(temp -> parent != NULL) {
+if(temp -> parent -> left == NULL && temp -> parent -> right == NULL) {
+temp -> parent -> height = 0;
+}
+else {
+int L, R;
+L = hohe(temp -> parent -> left);
+R = hohe(temp -> parent -> right);
+if(L > R) {
+temp -> parent -> height = L + 1;
+}
+else {
+temp -> parent -> height = R + 1;
+}
+}
+}
+temp = temp -> parent;
+}
+}
 
 
 void AVL_remove_all_nodes(AVLNode * node) {
